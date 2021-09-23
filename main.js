@@ -1,55 +1,85 @@
-class Character{
-    //Basic stats?
+class Character {
+  //Basic stats?
 }
 
-class Hero extends Character{
-    //Array of Hero types
-    //Accuracy
-    //Health
+class Hero extends Character {
+  //Array of Hero types
+  //Accuracy
+  //Health
 }
 
-class Jedi extends Hero{
-    //Jedi stats plus moves
-    //Name
-    //Any modifiers
-    //Any moves
+class Jedi extends Hero {
+  //Jedi stats plus moves
+  //Name
+  //Any modifiers
+  //Any moves
 }
 
-class Scoundrel extends Hero{
-    //Scoundrel stats plus moves
-    //Name
-    //Any modifiers
-    //Any moves
+class Scoundrel extends Hero {
+  //Scoundrel stats plus moves
+  //Name
+  //Any modifiers
+  //Any moves
 }
 
-class Alien extends Hero{
-    //Alien stats plus moves
-    //Name
-    //Any modifiers
-    //Any moves
+class Alien extends Hero {
+  //Alien stats plus moves
+  //Name
+  //Any modifiers
+  //Any moves
 }
 
-class Enemy extends Character{
-    //Methods for NPC attacks?
-    // Stats?
-    //Do we extend classes for each bad guy?
-    //Bad guy list: grunt/Stormtroopers, Darth Maul-type, krayt dragon
-    //Kat calls dragon
+class Enemy extends Character {
+  //Methods for NPC attacks?
+  // Stats?
+  //Do we extend classes for each bad guy?
+  //Bad guy list: grunt/Stormtroopers, Darth Maul-type, krayt dragon
+  //Kat calls dragon
 }
 
-class Dragon extends Enemy{
+class Dragon extends Enemy {
+  // what makes up a Dragon?
+  // attack =>
+  // breathesFire
+  // defeats Hero
+  constructor() {
+
+  }
 
 }
 
-class Grunt extends Enemy{
+//****POSSIBLY HAVE HERO & ENEMY ARRAYS INSTEAD OF CLASSES HERE */
+const heroesArray = [{
+ id: 4,
+  name: "alien",
+  health: 12,
+  specialMove: breathfire,
+  accuracyPercent: 85,
+}]
+
+const enemiesArray = [{
+  id: 0,
+  name: "dragon",
+  health: 15,
+  encounterChance: 15,
+  specialMove: breathfire,
+  accuracyPercent: 90,
+},
+  {
+    id: 1,
+    name: ''
+  }
+]
+
+class Grunt extends Enemy {
 
 }
 
-class Sith extends Enemy{
+class Sith extends Enemy {
 
 }
 
-class Game{
+class Game {
 
 }
 
@@ -69,7 +99,7 @@ Sam -- Scoundrel, Sith Lord -- enemy attack logic
 
 Enemy -- Change to something like
 
-enemyArray = [{id: 0, name: "dragon", health: 1000, 
+enemyArray = [{id: 0, name: "dragon", health: 1000,
             encounterChance: 15, specialMove: breathfire},
         {}]
 
@@ -86,7 +116,7 @@ special attacks and begin connecting game to the UI
 Sunday:
 Finish connecting the game to the UI and tuning balance
 
-ACHIEVEMENT UNLOCKED: 
+ACHIEVEMENT UNLOCKED:
 
 Maybe look into APIs and see if they can benefit us with this?
 
