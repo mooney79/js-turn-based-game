@@ -24,13 +24,14 @@ You should be able to select the player type from a dropdown.
 The enemy type should be randomly generated.
 The player should manually select the "Fight" action to attack.
 The enemy should automatically attack when it is its turn.
-You should use constructors and prototypes for the players and enemies.
+You should use CLASSES for the players and enemies.
 The player's health should be visible.
 The enemies health may be visible, at your discretion.
-Hey, Mikey, I Think He Likes It Mode
+
+<!-- Hey, Mikey, I Think He Likes It Mode
 The player should be able to either "Fight" or "Use Magic", or some similar setup. Each player type should have different types of attack and/or magic.
 Give the player the ability to use items, such as items that regain health or increase attack
 Make the game play cycle between two players Player 1 -> Enemy -> Player 2 -> Enemy
 Implement "ailments", e.g. being poisoned makes you weaker, being put to sleep makes you skip your turn
 Additional Resources
-Artwork is not required, but if you'd like to include artwork, this might help. Get your game working before you introduce artwork. If you have a beautiful page that doesn't work, it will be considered an incomplete assignment.
+Artwork is not required, but if you'd like to include artwork, this might help. Get your game working before you introduce artwork. If you have a beautiful page that doesn't work, it will be considered an incomplete assignment. -->
