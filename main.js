@@ -23,6 +23,14 @@ class Scoundrel extends Hero {
 }
 
 class Alien extends Hero {
+
+  constructor() {
+    this.stats = stats;
+    this.name = 'Alien';
+    this.health = 12;
+    this.encounterChance = 25;
+    this.specialMove = "beatWithClub";
+    this.accuracyPercent = 75;  }
   //Alien stats plus moves
   //Name
   //Any modifiers
@@ -43,31 +51,26 @@ class Dragon extends Enemy {
   // breathesFire
   // defeats Hero
   constructor() {
-
+      this.id = 0;
+      this.name = "Dragon";
+      this.health = 15;
+      this.encounterChance = 15;
+      this.specialMove = "breathfire";
+      this.accuracyPercent = 90;
   }
 
 }
 
-//****POSSIBLY HAVE HERO & ENEMY ARRAYS INSTEAD OF CLASSES HERE */
+//****BACKUP !!! POSSIBLY HAVE HERO & ENEMY ARRAYS INSTEAD OF CLASSES HERE */
 const heroesArray = [{
- id: 4,
-  name: "alien",
-  health: 12,
-  specialMove: breathfire,
-  accuracyPercent: 85,
+
 }]
 
 const enemiesArray = [{
-  id: 0,
-  name: "dragon",
-  health: 15,
-  encounterChance: 15,
-  specialMove: breathfire,
-  accuracyPercent: 90,
+
 },
   {
-    id: 1,
-    name: ''
+
   }
 ]
 
