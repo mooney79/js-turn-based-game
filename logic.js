@@ -20,12 +20,12 @@ class Scoundrel {
     constructor() {
       this.name = 'Scoundrel';
       this.health = 8;
-      this.baseMove = "shootBlaster"
-      this.specialMove = "hide";
+      this.baseMove = "Shoot blaster"
+      this.specialMove = "Hide";
       this.accuracyPercent = 85;
       this.score = 0;  
     }
-    shootBlaster(){
+    baseMove(){
         if(generatePercentage() < this.accuracyPercent) {    
             let damageMod = 1;    
             let damage = generateDamage(damageMod);
@@ -35,7 +35,7 @@ class Scoundrel {
             return `The ${this.name}'s blaster shot misses the enemy!`;
         }
     }
-    hide(){
+    specialMove(){
         console.log(`The ${this.name} hides from the enemy! To be implemented`);
     }
 }
@@ -285,9 +285,7 @@ function fetchScore() {
     })
 }
 
-
-//For testing
-//hero.score = 400;
+//hero.score = 400;  //for testing
 
 function uploadScore(){
     const outgoingScore = hero.score;
@@ -316,13 +314,16 @@ function uploadScore(){
 } 
 
 
+/////////////HERO CONTROL BUTTONS////////////
 /////// DOM SELECTORS //////
 const $attackButton = document.getElementById("attack-button");
+$attackButton.innerHTML = hero.baseMove;
 const $specialButton = document.getElementById("special-button");
+$specialButton.innerHTML = hero.specialMove;
 
 /////// EVENT LISTENERS ///////
-$attackButton.addEventListener("click", /*primary attack*/ );
-$specialButton.addEventListener("click", /*special move*/);
+$attackButton.addEventListener("click", hero.baseMove);//Build in retaliation on 1s timer?
+$specialButton.addEventListener("click", hero.specialMove);//Build in retaliation on 1s timer?
 
 
 /*
