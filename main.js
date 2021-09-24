@@ -1,5 +1,8 @@
 class Character {
-  //Basic stats?
+  constructor() {
+    this.name = 'Character';
+    this.health = 10;
+  }
 }
 
 class Hero extends Character {
@@ -16,25 +19,24 @@ class Jedi extends Hero {
 }
 
 class Scoundrel extends Hero {
-  //Scoundrel stats plus moves
-  //Name
-  //Any modifiers
-  //Any moves
+  constructor() {
+    this.stats = stats;
+    this.name = 'Scoundrel';
+    this.health = 8;
+    // this.encounterChance = 25;
+    this.baseMove = "shootBlaster"
+    this.specialMove = "hide";
+    this.accuracyPercent = 85;  }
 }
 
 class Alien extends Hero {
-
   constructor() {
     this.stats = stats;
     this.name = 'Alien';
     this.health = 12;
-    this.encounterChance = 25;
+    // this.encounterChance = 25;
     this.specialMove = "beatWithClub";
     this.accuracyPercent = 75;  }
-  //Alien stats plus moves
-  //Name
-  //Any modifiers
-  //Any moves
 }
 
 class Enemy extends Character {
@@ -42,14 +44,9 @@ class Enemy extends Character {
   // Stats?
   //Do we extend classes for each bad guy?
   //Bad guy list: grunt/Stormtroopers, Darth Maul-type, krayt dragon
-  //Kat calls dragon
 }
 
 class Dragon extends Enemy {
-  // what makes up a Dragon?
-  // attack =>
-  // breathesFire
-  // defeats Hero
   constructor() {
       this.id = 0;
       this.name = "Dragon";
@@ -58,10 +55,24 @@ class Dragon extends Enemy {
       this.specialMove = "breathfire";
       this.accuracyPercent = 90;
   }
+}
+
+class SithLord extends Enemy {
+  constructor() {
+      this.id = 1;
+      this.name = "Sith Lord";
+      this.health = 10;
+      this.encounterChance = 20;
+      this.basicMove = "lightsaberAttack";
+      this.specialMove = "shootLightning";
+      this.accuracyPercent = 80;
+      this.damageModifier = 1;
+  }
 
 }
 
 //****BACKUP !!! POSSIBLY HAVE HERO & ENEMY ARRAYS INSTEAD OF CLASSES HERE */
+/*
 const heroesArray = [{
 
 }]
@@ -87,7 +98,7 @@ const enemiesArray = [{
 
   }
 ]
-
+*/
 class Grunt extends Enemy {
 
 }
@@ -140,87 +151,3 @@ Maybe look into APIs and see if they can benefit us with this?
 
 */
 
-const exampleVillainArray = 
-    [{name: 'Stormtrooper',
-    hitChance: 35,
-    damageModifier: 0,
-    health: 3, 
-    },
-    {name: 'Dragon',
-    hitChance:60,
-    damageModifier: 3,
-    health: 15}];
-
-const exampleHero = {
-    name: 'Jedi',
-    hitChance: 75,
-    damageModifier:1,
-    health: 10,
-}
-
-let monsterIndex = 0;
-// let heroHealth = 10;
-
-
-
-function generatePercentage(){
-    return (Math.floor(Math.random() * 100)+1);    
-}
-
-function generateDamage(){  //Needs to eventually pass in either hero or villain 
-                            // to dynamically grab damageModifier
-    let damageMod = exampleVillainArray[monsterIndex].damageModifier;
-    return (Math.floor(Math.random() *2) +1 + damageMod);
-}
-
-function generateDamageHero(){  //Needs to eventually pass in either hero or villain 
-    // to dynamically grab damageModifier
-let damageMod = exampleHero.damageModifier;
-return (Math.floor(Math.random() *2) +1 + damageMod);
-}
-
-function pickEnemy(){
-    let randomNumber = generatePercentage();
-    if (randomNumber > 90) {
-        monsterIndex = 1;
-        console.log(`The hero encountered a ${exampleVillainArray[monsterIndex].name}`)
-    } else {
-        monsterIndex = 0;
-        console.log(`The hero encountered a ${exampleVillainArray[monsterIndex].name}`)
-    } return monsterIndex;
-}
-
-function enemyAttack(enemy){
-    if(generatePercentage() < exampleVillainArray[monsterIndex].hitChance) {        
-        let damage = generateDamage();
-        exampleHero.health -= damage;
-        return `The hero was hit by the ${exampleVillainArray[monsterIndex].name} for ${damage} damage!`
-    } else
-        return `The ${exampleVillainArray[monsterIndex].name} missed his attack!`;
-}
-
-function heroAttack(hero){
-    if(generatePercentage() < exampleHero.hitChance) {        
-        let damage = generateDamageHero();
-        exampleVillainArray[monsterIndex].health -= damage;
-        return `The ${exampleHero.name} hero hit by the ${exampleVillainArray[monsterIndex].name} for ${damage} damage!`
-    } else
-        return `The ${exampleHero.name} hero missed his attack!`;
-}
-
-pickEnemy();
-while (exampleHero.health > 0){
-    console.log(heroAttack());
-    console.log(`${exampleVillainArray[monsterIndex].name}  has ${exampleVillainArray[monsterIndex].health}  remaining!`);
-    if (exampleVillainArray[monsterIndex].health > 0) {
-        console.log(enemyAttack());
-    } else {
-        console.log(`${exampleVillainArray[monsterIndex].name} is dead and can't attack`);
-    }
-    console.log(`Hero has ${exampleHero.health} remaining!`);
-    if (exampleVillainArray[monsterIndex].health <= 0) {
-        exampleVillainArray[monsterIndex].health = 3;
-        pickEnemy();
-    }
-    
-}
