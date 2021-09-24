@@ -1,5 +1,5 @@
-/* 
-I'm moving game logic to this file so we can have it not cluttering up the main. 
+/*
+I'm moving game logic to this file so we can have it not cluttering up the main.
 When we reach the point where we can use it, we can copy it into the main.
 
 And once this file is empty, we can remove the dependency in index.html
@@ -8,10 +8,10 @@ And once this file is empty, we can remove the dependency in index.html
 
 ///// RANDOM NUMBER GENERATORS /////
 function generatePercentage(){
-    return (Math.floor(Math.random() * 100)+1);    
+    return (Math.floor(Math.random() * 100)+1);
 }
 
-function generateDamage(damageMod){  
+function generateDamage(damageMod){
     return (Math.floor(Math.random() *2) +1 + damageMod);
 }
 
@@ -24,11 +24,11 @@ class Scoundrel {
       this.basicMove = "Shoot blaster"
       this.specialtyMove = "Hide";
       this.accuracyPercent = 85;
-      this.score = 0;  
+      this.score = 0;
     }
     baseMove(){
-        if(generatePercentage() < this.accuracyPercent) {    
-            let damageMod = 1;    
+        if(generatePercentage() < this.accuracyPercent) {
+            let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
             return `The ${this.name} hits the ${enemy.name} for ${damage} damage!`
@@ -50,11 +50,11 @@ class Alien {
       this.basicMove = "Swing Club";
       this.specialtyMove = "Regenerate";
       this.accuracyPercent = 75;
-      this.score = 0;  
-    } 
+      this.score = 0;
+    }
     baseMove(){
-        if(generatePercentage() < this.accuracyPercent) {    
-            let damageMod = 1;    
+        if(generatePercentage() < this.accuracyPercent) {
+            let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
             return `The ${this.name} hits the ${enemy.name} with a giant clubfor ${damage} damage!`
@@ -103,7 +103,7 @@ class Jedi {
     }
 }
 
-  
+
 
 
 //////////// ENEMY CLASSES ////////////
@@ -122,15 +122,15 @@ class SithLord {
     }
     selectAttack(){
         if(generatePercentage() < this.specialMoveChance){
-            let damageMod = 3;   
+            let damageMod = 3;
             return this.shootLightning(damageMod);
         } else {
-            let damageMod = 1;    
+            let damageMod = 1;
             return this.lightsaberAttack(damageMod);
         }
     }
     lightsaberAttack(damageMod){
-        if(generatePercentage() < this.accuracyPercent) {    
+        if(generatePercentage() < this.accuracyPercent) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} hits the ${hero.name} for ${damage} damage!`
@@ -139,7 +139,7 @@ class SithLord {
         }
     }
     shootLightning(damageMod){
-        if(generatePercentage() < this.accuracyPercent - 30) {     
+        if(generatePercentage() < this.accuracyPercent - 30) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} blasts the ${hero.name} with lightning, inflicting ${damage} damage!`
@@ -164,15 +164,15 @@ class Dragon {
     }
     selectAttack(){
         if(generatePercentage() < this.specialMoveChance){
-            let damageMod = 3;   
+            let damageMod = 3;
             return this.breathFire(damageMod);
         } else {
-            let damageMod = 2;    
+            let damageMod = 2;
             return this.clawsAndBite(damageMod);
         }
     }
     clawsAndBite(damageMod){
-        if(generatePercentage() < this.accuracyPercent-40) {    
+        if(generatePercentage() < this.accuracyPercent-40) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} claws and bites the ${hero.name} for ${damage} damage!`
@@ -181,7 +181,7 @@ class Dragon {
         }
     }
     breathFire(damageMod){
-        if(generatePercentage() < this.accuracyPercent - 60) {     
+        if(generatePercentage() < this.accuracyPercent - 60) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} blasts the ${hero.name} with its fiery breath, inflicting ${damage} damage!`
@@ -190,7 +190,7 @@ class Dragon {
         }
     }
   }
- 
+
 class StormTrooper {
     constructor() {
         this.id = 2;
@@ -235,12 +235,12 @@ class StormTrooper {
 
 
 
-//Depending on which button is picked from dropdown, determine 
+//Depending on which button is picked from dropdown, determine
 //which Class hero becomes
 //Add event listener, on click set hero to button value(manually?), then launch game
 //routine..
 let hero = new Scoundrel;
-let enemy = new StormTrooper;   
+let enemy = new StormTrooper;
 
 //Enemy encounter rates to be implemented once
 //additional enemies are put in the game.
@@ -276,7 +276,7 @@ function pickEnemy(){
 function onEnemyDeath(){
     hero.score += enemy.score;
     enemy = pickEnemy();
-    
+
 }
 
 function onHeroDeath(){
@@ -324,8 +324,8 @@ function uploadScore(){
         })
         .then(data => console.log(data))
         .catch(error=> console.log('Error: ', error)) // catches errors if detected
-       
-} 
+
+}
 
 
 /////////////HERO CONTROL BUTTONS////////////
@@ -341,27 +341,46 @@ $healthEnemyBar.value = 100;
 // $jediButton = document.getElementById("jedi-dropdown");
 // $alienButton = document.getElementById("alien-dropdown");
 // $scoundrelButton = document.getElementById("scoundrel-dropdown");
+const $attackLog = document.querySelector('.game-log');
 $charSelect = document.getElementById("change-character");
 
 
 
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
+<<<<<<< HEAD
     $attackLog.innerHTML += hero.baseMove();  
     setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
+=======
+    console.log(hero.baseMove());
+    setTimeout(() => {console.log(enemy.selectAttack());
+<<<<<<< HEAD
+>>>>>>> cc1a25a (Adding dom selector for the log box)
         $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);         
+=======
+        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);
+>>>>>>> a74b17c (Adding dom selector for the log box)
     });
 $specialButton.addEventListener("click", () => {
+<<<<<<< HEAD
     $attackLog.innerHTML += hero.specialMove();  
     setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
+=======
+    console.log(hero.specialMove());
+    setTimeout(() => {console.log(enemy.selectAttack());
+<<<<<<< HEAD
+>>>>>>> cc1a25a (Adding dom selector for the log box)
         $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
+=======
+        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);
+>>>>>>> a74b17c (Adding dom selector for the log box)
     });
 
 
 
-//Switch statement to get value of drop down items?    
+//Switch statement to get value of drop down items?
 // $jediButton.addEventListener("click", () => {
 //     hero = new Jedi;
 //     enemy  = pickEnemy();
@@ -405,7 +424,7 @@ function selectHero(event){
 
 //////// SHOULD BE BUILT INTO ENEMY CLASSES
 function enemyAttack(enemy){
-    if(generatePercentage() < exampleVillainArray[monsterIndex].hitChance) {        
+    if(generatePercentage() < exampleVillainArray[monsterIndex].hitChance) {
         let damage = generateDamage();
         exampleHero.health -= damage;
         return `The hero was hit by the ${exampleVillainArray[monsterIndex].name} for ${damage} damage!`
@@ -415,7 +434,7 @@ function enemyAttack(enemy){
 
 //////// SHOULD BE BUILT INTO HERO CLASSES
 function heroAttack(hero){
-    if(generatePercentage() < exampleHero.hitChance) {        
+    if(generatePercentage() < exampleHero.hitChance) {
         let damage = generateDamageHero();
         exampleVillainArray[monsterIndex].health -= damage;
         return `The ${exampleHero.name} hero hit by the ${exampleVillainArray[monsterIndex].name} for ${damage} damage!`
@@ -438,6 +457,6 @@ while (hero.health > 0){
     if (exampleVillainArray[monsterIndex].health <= 0) {
         exampleVillainArray[monsterIndex].health = 3;
         pickEnemy();
-    }    
+    }
 }
 */

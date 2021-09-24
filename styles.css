@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
 }
   @font-face {
@@ -12,7 +12,9 @@ body {
     font-family: 'Death Star', sans-serif;
 
 }
-
+nav {
+    padding-top:10px;
+}
 select {
     padding:5px;
 }
@@ -24,11 +26,16 @@ select {
 
 #health {
     background-color: green;
+    width: 100%;
 }
-progress#health-enemy {
-    background-color: red;
+
+
+progress#health-enemy::-webkit-progress-value {
     background: red;
+    width:100%;
 }
+/* progress::-webkit-progress-bar {background-color: red; width: 100%;} */
+
 #attack-button {
     background-color: red;
     color: white;
@@ -40,4 +47,11 @@ progress#health-enemy {
 
 .buttons-for-attack {
     display:block
+}
+
+.game-log-area {
+    background: rgba(117, 117, 117, 0.5);
+    height: 300px;
+    border: none;
+    border-radius: 10px;
 }
