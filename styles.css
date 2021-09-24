@@ -25,8 +25,9 @@ select {
 #health {
     background-color: green;
 }
-#health-enemy {
+progress#health-enemy {
     background-color: red;
+    background: red;
 }
 #attack-button {
     background-color: red;
