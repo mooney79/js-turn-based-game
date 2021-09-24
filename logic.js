@@ -15,7 +15,7 @@ function generateDamage(damageMod){
     return (Math.floor(Math.random() *2) +1 + damageMod);
 }
 
-//////////// CLASSES ////////////
+//////////// HERO CLASSES ////////////
 class Scoundrel {
     constructor() {
       this.name = 'Scoundrel';
@@ -40,7 +40,62 @@ class Scoundrel {
     }
 }
 
+
+class Alien {
+    constructor() {
+      this.name = 'Alien';
+      this.health = 12;
+      this.baseMove = "beatWithClub";
+      this.specialMove = "regainHealth";
+      this.accuracyPercent = 75;
+      this.score = 0;  
+    } 
+    beatWithClub(){
+        if(generatePercentage() < this.accuracyPercent) {    
+            let damageMod = 1;    
+            let damage = generateDamage(damageMod);
+            enemy.health -= damage;
+            return `The ${this.name} hits the ${enemy.name} with a giant clubfor ${damage} damage!`
+        } else {
+            return `The ${this.name}'s club only grazes the ${enemy.name}!`;
+        }
+    }
+    regainHealth(){
+        hero.health += 5;
+        if (hero.health > 12) {
+            hero.health = 12;
+        }
+        console.log(`The ${this.name} summons his inner reserves shakes off some damage.`);
+    }
+}
+
+class Jedi { //Update with Nathan's work
+    constructor() {
+      this.name = 'Jedi';
+      this.health = 8;
+      this.baseMove = "shootBlaster"
+      this.specialMove = "hide";
+      this.accuracyPercent = 85;
+      this.score = 0;  
+    }
+    shootBlaster(){
+        if(generatePercentage() < this.accuracyPercent) {    
+            let damageMod = 1;    
+            let damage = generateDamage(damageMod);
+            enemy.health -= damage;
+            return `The ${this.name} hits the ${enemy.name} for ${damage} damage!`
+        } else {
+            return `The ${this.name}'s blaster shot misses the enemy!`;
+        }
+    }
+    hide(){
+        console.log(`The ${this.name} hides from the enemy! To be implemented`);
+    }
+}
   
+
+
+//////////// ENEMY CLASSES ////////////
 class SithLord {
     constructor() {
         this.name = 'Sith Lord';
@@ -133,6 +188,7 @@ class StormTrooper {
         this.specialMove = "blastBlindly";
         this.specialMoveChance = 35;
         this.accuracyPercent = 10;
+        this.score = 100;
     }
     selectAttack(){
         if(generatePercentage() < this.specialMoveChance){
@@ -161,12 +217,15 @@ class StormTrooper {
             return `The ${this.name} shot everything but the ${hero.name}!`;
         }
     }
+}
 
 
 
 
 //Depending on which button is picked from dropdown, determine 
 //which Class hero becomes
+//Add event listener, on click set hero to button value(manually?), then launch game
+//routine..
 let hero = new Scoundrel;   
 
 //Enemy encounter rates to be implemented once
@@ -174,14 +233,20 @@ let hero = new Scoundrel;
 
 function pickEnemy(){
     let randomNumber = generatePercentage();
-    if (randomNumber > 50) {
+    if (randomNumber < 15) {
         console.log('The hero encountered a Dragon!');
         return new Dragon;
-    } else {
+    } else if (randomNumber < 35) {
         console.log('The hero encountered a hooded figure!');
         return new SithLord;
+    } else {
+        console.log('The hero ran into a Stormtrooper!');
+        return new StormTrooper;
     }
 }
+
+
+
 
 let enemy = pickEnemy();
 console.log(hero.shootBlaster());
@@ -192,6 +257,8 @@ console.log(enemy.selectAttack());
 console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
 
 
+
+//////// CALLS ON DEATHS ////////
 function onEnemyDeath(){
     hero.score += enemy.score;
     enemy = pickEnemy();
@@ -206,7 +273,7 @@ function onHeroDeath(){
 
 
 
-
+///// SCOREBOARD/API STUFF
 
 function fetchScore() {
     fetch('https://tiny-taco-server.herokuapp.com/tbscore/')
@@ -218,9 +285,7 @@ function fetchScore() {
     })
 }
 
-/*
 
-*/
 //For testing
 //hero.score = 400;
 
@@ -251,6 +316,14 @@ function uploadScore(){
 } 
 
 
+/////// DOM SELECTORS //////
+const $attackButton = document.getElementById("attack-button");
+const $specialButton = document.getElementById("special-button");
+
+/////// EVENT LISTENERS ///////
+$attackButton.addEventListener("click", /*primary attack*/ );
+$specialButton.addEventListener("click", /*special move*/);
+
 
 /*
 
@@ -264,18 +337,6 @@ function uploadScore(){
 
 
 /*
-////// RE-TOOL TO ACCOMODATE ENCOUNTER CHANCE, then "let enemy = new Whatever"
-let monsterIndex = 0;
-function pickEnemy(){
-    let randomNumber = generatePercentage();
-    if (randomNumber > 90) {
-        monsterIndex = 1;
-        console.log(`The hero encountered a ${exampleVillainArray[monsterIndex].name}`)
-    } else {
-        monsterIndex = 0;
-        console.log(`The hero encountered a ${exampleVillainArray[monsterIndex].name}`)
-    } return monsterIndex;
-}
 
 //////// SHOULD BE BUILT INTO ENEMY CLASSES
 function enemyAttack(enemy){
@@ -300,7 +361,7 @@ function heroAttack(hero){
 
 ///// AUTOMATES THE FIGHTS.  GOOD FOR TESTING, NOT FOR PLAY.
 pickEnemy();
-while (exampleHero.health > 0){
+while (hero.health > 0){
     console.log(heroAttack());
     console.log(`${exampleVillainArray[monsterIndex].name}  has ${exampleVillainArray[monsterIndex].health}  remaining!`);
     if (exampleVillainArray[monsterIndex].health > 0) {
