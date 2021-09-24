@@ -235,7 +235,8 @@ class StormTrooper {
 //which Class hero becomes
 //Add event listener, on click set hero to button value(manually?), then launch game
 //routine..
-let hero = new Scoundrel;   
+let hero = new Scoundrel;
+let enemy = new StormTrooper;   
 
 //Enemy encounter rates to be implemented once
 //additional enemies are put in the game.
@@ -331,9 +332,10 @@ const $specialButton = document.getElementById("special-button");
 $specialButton.innerHTML = hero.specialtyMove;
 const $healthBar = document.getElementById("health");
 $healthBar.value = 100;
-$jediButton = document.getElementById("jedi-dropdown");
-$alienButton = document.getElementById("alien-dropdown");
-$scoundrelButton = document.getElementById("scoundrel-dropdown");
+// $jediButton = document.getElementById("jedi-dropdown");
+// $alienButton = document.getElementById("alien-dropdown");
+// $scoundrelButton = document.getElementById("scoundrel-dropdown");
+$charSelect = document.getElementById("change-character");
 
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
@@ -347,24 +349,55 @@ $specialButton.addEventListener("click", () => {
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
     });
 
-$jediButton.addEventListener("click", () => {
-    hero = new Jedi;
-    const enemy  = pickEnemy()
-});
-$alienButton.addEventListener("click", () => {
-    hero = new Alien;
-    const enemy  = pickEnemy()
-});
-$scoundrelButton.addEventListener("click", () => {
-    hero = new Alien;
-    const enemy  = pickEnemy()
-});
-// $alienButton.addEventListener;
-// $scoundrelButton.addEventListener;
 
 
+//Switch statement to get value of drop down items?    
+// $jediButton.addEventListener("click", () => {
+//     hero = new Jedi;
+//     enemy  = pickEnemy();
+//     console.log('Jedi clicked');
+// });
+// $alienButton.addEventListener("click", () => {
+//     hero = new Alien;
+//     enemy  = pickEnemy();
+// });
+// $scoundrelButton.addEventListener("click", () => {
+//     hero = new Alien;
+//     enemy  = pickEnemy();
+// });
+
+$charSelect.addEventListener("change", selectHero);
+
+function selectHero(event){
+    if (menu.value == '1') {
+        hero = new Jedi;
+        enemy  = pickEnemy();
+      } else if (menu.value == '2') {
+        hero = new Scoundrel;
+        enemy  = pickEnemy();
+      } else if (menu.value == '3') {
+        hero = new Alien;
+        enemy  = pickEnemy();
+      }
+}
 /*
+var menu = document.getElementById("change_chart");
+menu.addEventListener("change", generateData);
 
+function generateData(event) {
+  if (menu.value == '1') {
+    alert(1);
+  } else if (menu.value == '2') {
+    alert(2);
+  } else if (menu.value == '3') {
+    alert(3);
+  }
+}
+<select id="change_chart">
+    <option value="1" selected>livejournal</option>
+    <option value="2">librarybooks</option>
+    <option value="3">sunspots</option>
+</select>
 */
 
 
