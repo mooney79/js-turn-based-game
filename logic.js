@@ -22,7 +22,8 @@ class Scoundrel {
       this.health = 8;
       this.baseMove = "shootBlaster"
       this.specialMove = "hide";
-      this.accuracyPercent = 85;  
+      this.accuracyPercent = 85;
+      this.score = 0;  
     }
     shootBlaster(){
         if(generatePercentage() < this.accuracyPercent) {    
@@ -50,6 +51,7 @@ class SithLord {
         this.specialMove = "shootLightning";
         this.specialMoveChance = 15;
         this.accuracyPercent = 80;
+        this.score = 350;
     }
     selectAttack(){
         if(generatePercentage() < this.specialMoveChance){
@@ -90,6 +92,7 @@ class Dragon {
         this.specialMove = "breathfire";
         this.specialMoveChance = 15;
         this.accuracyPercent = 90;
+        this.score = 500;
     }
     selectAttack(){
         if(generatePercentage() < this.specialMoveChance){
@@ -150,7 +153,69 @@ console.log(enemy.selectAttack());
 console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
 
 
+function onEnemyDeath(){
+    hero.score += enemy.score;
+    enemy = pickEnemy();
+    
+}
 
+function onHeroDeath(){
+    console.log(`You died!  Your final score was: ${hero.score}`);
+    //Create API to fetch and push hero score for screen on game over
+    console.log('Refresh and choose a new hero to try again!');
+}
+
+
+
+
+
+function fetchScore() {
+    fetch('https://tiny-taco-server.herokuapp.com/tbscore/')
+    .then(response => response.json())
+    .then(data => {
+        // data["timestamp"].sort();
+        // data.forEach(createElement)});
+        console.log(data);
+    })
+}
+
+/*
+
+*/
+//For testing
+//hero.score = 400;
+
+function uploadScore(){
+    const outgoingScore = hero.score;
+    const player = prompt(`Congratulations!  Your score was ${hero.score}. Enter your name:`);
+    let sentPacket = {
+        player: player,
+        hero: hero.name,
+        score: outgoingScore,
+    }
+    fetch('https://tiny-taco-server.herokuapp.com/tbscore/', {
+            method: 'POST',
+            headers: {
+             'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sentPacket),
+        })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error('Ooops! Something went wrong!')
+            }
+            return response.json();
+        })
+        .then(data => console.log(data))
+        .catch(error=> console.log('Error: ', error)) // catches errors if detected
+       
+} 
+
+
+
+/*
+
+*/
 
 
 

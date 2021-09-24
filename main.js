@@ -6,6 +6,9 @@ class Character {
 }
 
 class Hero extends Character {
+  constructor(){
+    super();
+  }
   //Array of Hero types
   //Accuracy
   //Health
