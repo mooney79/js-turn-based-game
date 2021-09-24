@@ -95,6 +95,37 @@ class Jedi { //Update with Nathan's work
         console.log(`The ${this.name} hides from the enemy! To be implemented`);
     }
 }
+class Jedi {
+    constructor() {
+        this.name = 'Jedi';
+        this.health = 10;
+        this.baseMove = 'forcePush';
+        this.specialMove = 'saberflurry';
+        this.accuracyPercent = 95;
+        this.score = 0;
+    }
+    forcePush(){
+        if(generatePercentage() < this.accuracyPercent){
+            let damageMod = 1;
+            let damage = generateDamage(damageMod);
+            enemy.health -= damage;
+            return `The ${hero.name} used the force and dealt ${damage} damage!`;
+        } else {
+            return `The force was not strong enough in this young ${hero.name}...`;
+        }
+    }
+    saberFlurry(){
+        if(generatedPercentage() < this.accuracyPercent - 15){
+            let damageMod = 3;
+            let damage = generatedDamage(damageMod);
+            enemy.health -= damage;
+            return `The ${hero.name} swings his lightsaber in a flurry dealing ${damage} damage!`;
+        } else {
+            return `The so called ${hero.name} should learn to land at least one hit.`;
+        }
+    }
+}
+
   
 
 
@@ -221,7 +252,10 @@ class StormTrooper {
         }
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4b472a5 (jedi attack logic)
 
 
 
