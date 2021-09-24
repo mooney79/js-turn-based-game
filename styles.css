@@ -4,4 +4,20 @@
 
 body {
     background-image: url('https://wallpaperaccess.com/full/3430638.png');
+    color:White;
+    font-family: 'Death Star', sans-serif;
+
+}
+
+select {
+    padding:5px;
+}
+
+.game-title{
+    text-align: center;
+    font-size: 50px;
+}
+
+.dropdown-item {
+    font-family: 'Death Star' ;
 }

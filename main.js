@@ -1,3 +1,10 @@
+// let dropItem = document.querySelector('.dropdown-item');
+// dropItem.addEventListener('click', function () {
+
+// })
+
+
+
 class Character {
   constructor() {
     this.name = 'Character';
