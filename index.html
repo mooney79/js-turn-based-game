@@ -19,9 +19,9 @@
 
             <select  name='origin'>
                 <option class="dropdown-item" value="select">Select...</option>
-                <option class="dropdown-item" value="jedi">Jedi</option>
-                <option class="dropdown-item" value="scoundrel">Scoundrel</option>
-                <option class="dropdown-item" value="alien">Alien</option>
+                <option class="dropdown-item" id="jedi-dropdown" value="jedi">Jedi</option>
+                <option class="dropdown-item" id="scoundrel-dropdown" value="scoundrel">Scoundrel</option>
+                <option class="dropdown-item" id="alien-dropdown" value="alien">Alien</option>
              </select>
             </div>
         </nav>
@@ -30,11 +30,12 @@
 
         <div class="col-3" >
             <section class="hero-section">
-                <div class="progress">
-                <div id="health" value="100" max="100" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <progress id="health" value="100" max="100">Progress</progress>
+                <div class="buttons-for-attack">
+                    <button id="attack-button">ATTACK</button>
+                    <button id="special-button">Special Move</button>
                 </div>
-                 <button id="attack-button">ATTACK</button>
-                 <button id="special-button">Special Move</button>
+
             </section>
         </div>
         <div class="col-6" >
@@ -45,7 +46,14 @@
             </section>
         </div>
          <div class="col-3" >
+            <section class="enemy-section">
+                <progress id="health-enemy" value="100" max="100">Progress</progress>
+                <div class="buttons-for-attack">
+                    <button id="attack-button">ATTACK</button>
+                    <button id="special-button">Special Move</button>
+                </div>
 
+            </section>
         </div>
      </section>
     </section>

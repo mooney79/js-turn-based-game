@@ -22,6 +22,21 @@ select {
     font-size: 50px;
 }
 
-.dropdown-item {
-    font-family: 'Death Star' ;
+#health {
+    background-color: green;
+}
+#health-enemy {
+    background-color: red;
+}
+#attack-button {
+    background-color: red;
+    color: white;
+}
+
+#special-button {
+    background-color: yellow;
+}
+
+.buttons-for-attack {
+    display:block
 }
