@@ -75,6 +75,7 @@ class Jedi {
     constructor() {
         this.name = 'Jedi';
         this.health = 10;
+        this.healthMax = 10;
         this.basicMove = 'Force Push';
         this.specialtyMove = 'Saber Flurry';
         this.accuracyPercent = 95;
@@ -91,9 +92,9 @@ class Jedi {
         }
     }
     specialMove(){
-        if(generatedPercentage() < this.accuracyPercent - 15){
+        if(generatePercentage() < this.accuracyPercent - 15){
             let damageMod = 3;
-            let damage = generatedDamage(damageMod);
+            let damage = generateDamage(damageMod);
             enemy.health -= damage;
             return `The ${hero.name} swings his lightsaber in a flurry dealing ${damage} damage!`;
         } else {
@@ -110,6 +111,7 @@ class SithLord {
     constructor() {
         this.name = 'Sith Lord';
         this.health = 10;
+        this.healthMax = 10;
         this.id = 1;
         this.encounterChance = 20;
         this.basicMove = "lightsaberAttack";
@@ -152,6 +154,7 @@ class Dragon {
         this.id = 0;
         this.name = "Dragon";
         this.health = 15;
+        this.healthMax = 15;
         this.encounterChance = 15;
         this.basicMove = "clawsAndBite";
         this.specialMove = "breathfire";
@@ -193,6 +196,7 @@ class StormTrooper {
         this.id = 2;
         this.name = "StormTrooper";
         this.health = 8;
+        this.healthMax = 8;
         this.encounterChance = 65;
         this.basicMove = "shootBlindly";
         this.specialMove = "blastBlindly";
@@ -332,20 +336,26 @@ const $specialButton = document.getElementById("special-button");
 $specialButton.innerHTML = hero.specialtyMove;
 const $healthBar = document.getElementById("health");
 $healthBar.value = 100;
+const $healthEnemyBar = document.getElementById("health-enemy");
+$healthEnemyBar.value = 100;
 // $jediButton = document.getElementById("jedi-dropdown");
 // $alienButton = document.getElementById("alien-dropdown");
 // $scoundrelButton = document.getElementById("scoundrel-dropdown");
 $charSelect = document.getElementById("change-character");
 
+
+
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
     console.log(hero.baseMove());  
     setTimeout(() => {console.log(enemy.selectAttack());
-        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
+        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
+        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);         
     });
 $specialButton.addEventListener("click", () => {
     console.log(hero.specialMove());  
     setTimeout(() => {console.log(enemy.selectAttack());
+        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
     });
 
@@ -369,36 +379,20 @@ $specialButton.addEventListener("click", () => {
 $charSelect.addEventListener("change", selectHero);
 
 function selectHero(event){
-    if (menu.value == '1') {
+    if ($charSelect.value == 'jedi') {
         hero = new Jedi;
         enemy  = pickEnemy();
-      } else if (menu.value == '2') {
+      } else if ($charSelect.value == 'scoundrel') {
         hero = new Scoundrel;
         enemy  = pickEnemy();
-      } else if (menu.value == '3') {
+      } else if ($charSelect.value == 'alien') {
         hero = new Alien;
         enemy  = pickEnemy();
       }
+    $attackButton.innerHTML = hero.basicMove;
+    $specialButton.innerHTML = hero.specialtyMove;
 }
-/*
-var menu = document.getElementById("change_chart");
-menu.addEventListener("change", generateData);
 
-function generateData(event) {
-  if (menu.value == '1') {
-    alert(1);
-  } else if (menu.value == '2') {
-    alert(2);
-  } else if (menu.value == '3') {
-    alert(3);
-  }
-}
-<select id="change_chart">
-    <option value="1" selected>livejournal</option>
-    <option value="2">librarybooks</option>
-    <option value="3">sunspots</option>
-</select>
-*/
 
 
 
