@@ -122,6 +122,45 @@ class Dragon {
         }
     }
   }
+ 
+class StormTrooper {
+    constructor() {
+        this.id = 2;
+        this.name = "StormTrooper";
+        this.health = 8;
+        this.encounterChance = 65;
+        this.basicMove = "shootBlindly";
+        this.specialMove = "blastBlindly";
+        this.specialMoveChance = 35;
+        this.accuracyPercent = 10;
+    }
+    selectAttack(){
+        if(generatePercentage() < this.specialMoveChance){
+            let damageMod = 2;
+            return this.blastBlindly(damageMod);
+        } else {
+            let damageMod = 1;
+            return this.shootBlindly(damageMod);
+        }
+    }
+    shootBlindly(damageMod){
+        if(generatePercentage() < this.accuracyPercent){
+            let damage = generateDamage(damageMod);
+            hero.health -= damage;
+            return `The ${this.name} somehow hit ${hero.name}, dealing ${damage} damage!`
+        }   else {
+            return `The ${this.name} needs to work on his aim`;
+        }
+    }
+    blastBlindly(damageMod){
+        if(generatePercentage() < this.accuracyPercent + 40) {
+            let damage = generateDamage(damageMod);
+            hero.health -= damage;
+            return `The ${this.name} landed at least 1 shot in the dark on the ${hero.name}, dealing ${damage} damage!`
+        } else {
+            return `The ${this.name} shot everything but the ${hero.name}!`;
+        }
+    }
 
 
 

@@ -22,10 +22,14 @@ class Hero extends Character {
 }
 
 class Jedi extends Hero {
-  //Jedi stats plus moves
-  //Name
-  //Any modifiers
-  //Any moves
+  constructor() {
+    this.stats = stats;
+    this.name ='Jedi';
+    this.health = 10;
+    this.baseMove = "slash";
+    this.specialMove = "forcelightning";
+    this.accuracyPercent = 90; 
+  }
 }
 
 class Scoundrel extends Hero {
@@ -63,8 +67,7 @@ class Dragon extends Enemy {
       this.health = 15;
       this.encounterChance = 15;
       this.specialMove = "breathfire";
-      this.accuracyPercent = 90;
-  }
+      this.accuracyPercent = 90; }
 }
 
 class SithLord extends Enemy {
@@ -81,6 +84,18 @@ class SithLord extends Enemy {
 
 }
 
+class StormTrooper extends Enemy {
+  constructor() {
+      this.id = 2;
+      this.name = "StormTrooper";
+      this.health = 8;
+      this.encounterChance = 65;
+      this.basicMove = "ShootBlindly";
+      this.specialMove = "BlastBlindly";
+      this.specialMoveChance = 35;
+      this.accuracyPercent = 10;
+  }
+}
 //****BACKUP !!! POSSIBLY HAVE HERO & ENEMY ARRAYS INSTEAD OF CLASSES HERE */
 /*
 const heroesArray = [{
