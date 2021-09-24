@@ -68,6 +68,20 @@ const heroesArray = [{
 
 const enemiesArray = [{
 
+ id: 4,
+  name: "alien",
+  health: 12,
+  specialMove: 'breathfire',
+  accuracyPercent: 85,
+}]
+
+const enemiesArray = [{
+  id: 0,
+  name: "dragon",
+  health: 15,
+  encounterChance: 15,
+  specialMove: 'breathfire',
+  accuracyPercent: 90,
 },
   {
 
