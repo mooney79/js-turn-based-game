@@ -441,4 +441,16 @@ while (hero.health > 0){
         pickEnemy();
     }
 }
+
+
+
+IMPLEMENT 
+On-death logic
+new game state when selecting new character
+Game over stuff
+IMG swapping on char/enemy select
+API stuff
+scroll bar
+score thingie
+animations
 */
