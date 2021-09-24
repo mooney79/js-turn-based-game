@@ -20,8 +20,8 @@ class Scoundrel {
     constructor() {
       this.name = 'Scoundrel';
       this.health = 8;
-      this.baseMove = "Shoot blaster"
-      this.specialMove = "Hide";
+      this.basicMove = "Shoot blaster"
+      this.specialtyMove = "Hide";
       this.accuracyPercent = 85;
       this.score = 0;  
     }
@@ -45,12 +45,12 @@ class Alien {
     constructor() {
       this.name = 'Alien';
       this.health = 12;
-      this.baseMove = "beatWithClub";
-      this.specialMove = "regainHealth";
+      this.basicMove = "Swing Club";
+      this.specialtyMove = "Regenerate";
       this.accuracyPercent = 75;
       this.score = 0;  
     } 
-    beatWithClub(){
+    baseMove(){
         if(generatePercentage() < this.accuracyPercent) {    
             let damageMod = 1;    
             let damage = generateDamage(damageMod);
@@ -60,7 +60,7 @@ class Alien {
             return `The ${this.name}'s club only grazes the ${enemy.name}!`;
         }
     }
-    regainHealth(){
+    specialMove(){
         hero.health += 5;
         if (hero.health > 12) {
             hero.health = 12;
@@ -73,12 +73,12 @@ class Jedi { //Update with Nathan's work
     constructor() {
       this.name = 'Jedi';
       this.health = 8;
-      this.baseMove = "shootBlaster"
-      this.specialMove = "hide";
+      this.basicMove = "Swing Lightsaber"
+      this.specialtyMove = "hide";
       this.accuracyPercent = 85;
       this.score = 0;  
     }
-    shootBlaster(){
+    baseMove(){
         if(generatePercentage() < this.accuracyPercent) {    
             let damageMod = 1;    
             let damage = generateDamage(damageMod);
@@ -88,7 +88,7 @@ class Jedi { //Update with Nathan's work
             return `The ${this.name}'s blaster shot misses the enemy!`;
         }
     }
-    hide(){
+    specialMove(){
         console.log(`The ${this.name} hides from the enemy! To be implemented`);
     }
 }
@@ -249,12 +249,12 @@ function pickEnemy(){
 
 
 let enemy = pickEnemy();
-console.log(hero.shootBlaster());
-console.log(enemy.selectAttack());
-console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
-console.log(hero.shootBlaster());
-console.log(enemy.selectAttack());
-console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
+// console.log(hero.shootBlaster());
+// console.log(enemy.selectAttack());
+// console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
+// console.log(hero.shootBlaster());
+// console.log(enemy.selectAttack());
+// console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
 
 
 
@@ -317,13 +317,18 @@ function uploadScore(){
 /////////////HERO CONTROL BUTTONS////////////
 /////// DOM SELECTORS //////
 const $attackButton = document.getElementById("attack-button");
-$attackButton.innerHTML = hero.baseMove;
+$attackButton.innerHTML = hero.basicMove;
 const $specialButton = document.getElementById("special-button");
-$specialButton.innerHTML = hero.specialMove;
+$specialButton.innerHTML = hero.specialtyMove;
+const $healthBar = document.getElementById("health");
+$healthBar = 44;
 
 /////// EVENT LISTENERS ///////
-$attackButton.addEventListener("click", hero.baseMove);//Build in retaliation on 1s timer?
-$specialButton.addEventListener("click", hero.specialMove);//Build in retaliation on 1s timer?
+$attackButton.addEventListener("click", () => {
+    console.log(hero.baseMove());  
+    setTimeout(() => {console.log(enemy.selectAttack())}, 1000);
+    } );//Build in retaliation on 1s timer?
+$specialButton.addEventListener("click", () => {hero.specialMove()} );//Build in retaliation on 1s timer?
 
 
 /*
