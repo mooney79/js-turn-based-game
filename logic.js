@@ -71,40 +71,16 @@ class Alien {
     }
 }
 
-class Jedi { //Update with Nathan's work
-    constructor() {
-      this.name = 'Jedi';
-      this.health = 8;
-      this.healthMax = 8;
-      this.basicMove = "Swing Lightsaber"
-      this.specialtyMove = "hide";
-      this.accuracyPercent = 85;
-      this.score = 0;  
-    }
-    baseMove(){
-        if(generatePercentage() < this.accuracyPercent) {    
-            let damageMod = 1;    
-            let damage = generateDamage(damageMod);
-            enemy.health -= damage;
-            return `The ${this.name} hits the ${enemy.name} for ${damage} damage!`
-        } else {
-            return `The ${this.name}'s blaster shot misses the enemy!`;
-        }
-    }
-    specialMove(){
-        console.log(`The ${this.name} hides from the enemy! To be implemented`);
-    }
-}
 class Jedi {
     constructor() {
         this.name = 'Jedi';
         this.health = 10;
-        this.baseMove = 'forcePush';
-        this.specialMove = 'saberflurry';
+        this.basicMove = 'Force Push';
+        this.specialtyMove = 'Saber Flurry';
         this.accuracyPercent = 95;
         this.score = 0;
     }
-    forcePush(){
+    baseMove(){
         if(generatePercentage() < this.accuracyPercent){
             let damageMod = 1;
             let damage = generateDamage(damageMod);
@@ -114,7 +90,7 @@ class Jedi {
             return `The force was not strong enough in this young ${hero.name}...`;
         }
     }
-    saberFlurry(){
+    specialMove(){
         if(generatedPercentage() < this.accuracyPercent - 15){
             let damageMod = 3;
             let damage = generatedDamage(damageMod);
@@ -252,10 +228,6 @@ class StormTrooper {
         }
     }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b472a5 (jedi attack logic)
 
 
 
