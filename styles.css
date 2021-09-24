@@ -51,7 +51,7 @@ progress#health-enemy::-webkit-progress-value {
 
 .game-log-area {
     background: rgba(117, 117, 117, 0.5);
-    height: 300px;
+    height: 100%;
     border: none;
     border-radius: 10px;
 }
