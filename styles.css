@@ -6,6 +6,10 @@
   src: url("DeathStar-VmWB.ttf");
   }
 
+  img{
+      background-color: transparent;
+      width: 100%;
+  }
 body {
     background-image: url('https://wallpaperaccess.com/full/3430638.png');
     color:White;

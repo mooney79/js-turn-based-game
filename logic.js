@@ -37,7 +37,7 @@ class Scoundrel {
         }
     }
     specialMove(){
-        $attackLog.innerHTML += `The ${this.name} hides from the enemy! To be implemented<br>`;
+        return `The ${this.name} hides from the enemy! To be implemented<br>`;
     }
 }
 
