@@ -257,7 +257,7 @@ function pickEnemy(){
 
 
 
-let enemy = pickEnemy();
+// let enemy = pickEnemy();
 // console.log(hero.shootBlaster());
 // console.log(enemy.selectAttack());
 // console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
@@ -348,10 +348,19 @@ $specialButton.addEventListener("click", () => {
     });
 
 $jediButton.addEventListener("click", () => {
-
+    hero = new Jedi;
+    const enemy  = pickEnemy()
 });
-$alienButton.addEventListener;
-$scoundrelButton.addEventListener;
+$alienButton.addEventListener("click", () => {
+    hero = new Alien;
+    const enemy  = pickEnemy()
+});
+$scoundrelButton.addEventListener("click", () => {
+    hero = new Alien;
+    const enemy  = pickEnemy()
+});
+// $alienButton.addEventListener;
+// $scoundrelButton.addEventListener;
 
 
 /*
