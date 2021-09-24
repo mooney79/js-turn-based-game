@@ -359,18 +359,28 @@ const $specialButton = document.getElementById("special-button");
 $specialButton.innerHTML = hero.specialtyMove;
 const $healthBar = document.getElementById("health");
 $healthBar.value = 100;
+$jediButton = document.getElementById("jedi-dropdown");
+$alienButton = document.getElementById("alien-dropdown");
+$scoundrelButton = document.getElementById("scoundrel-dropdown");
 
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
     console.log(hero.baseMove());  
     setTimeout(() => {console.log(enemy.selectAttack());
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
-    } );//Build in retaliation on 1s timer?
+    });
 $specialButton.addEventListener("click", () => {
     console.log(hero.specialMove());  
     setTimeout(() => {console.log(enemy.selectAttack());
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
-    } );
+    });
+
+$jediButton.addEventListener("click", () => {
+
+});
+$alienButton.addEventListener;
+$scoundrelButton.addEventListener;
+
 
 /*
 
