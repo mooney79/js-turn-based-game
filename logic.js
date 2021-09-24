@@ -20,6 +20,7 @@ class Scoundrel {
     constructor() {
       this.name = 'Scoundrel';
       this.health = 8;
+      this.healthMax = 8;
       this.basicMove = "Shoot blaster"
       this.specialtyMove = "Hide";
       this.accuracyPercent = 85;
@@ -45,6 +46,7 @@ class Alien {
     constructor() {
       this.name = 'Alien';
       this.health = 12;
+      this.healthMax = 12;
       this.basicMove = "Swing Club";
       this.specialtyMove = "Regenerate";
       this.accuracyPercent = 75;
@@ -73,6 +75,7 @@ class Jedi { //Update with Nathan's work
     constructor() {
       this.name = 'Jedi';
       this.health = 8;
+      this.healthMax = 8;
       this.basicMove = "Swing Lightsaber"
       this.specialtyMove = "hide";
       this.accuracyPercent = 85;
@@ -321,15 +324,19 @@ $attackButton.innerHTML = hero.basicMove;
 const $specialButton = document.getElementById("special-button");
 $specialButton.innerHTML = hero.specialtyMove;
 const $healthBar = document.getElementById("health");
-$healthBar = 44;
+$healthBar.value = 100;
 
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
     console.log(hero.baseMove());  
-    setTimeout(() => {console.log(enemy.selectAttack())}, 1000);
+    setTimeout(() => {console.log(enemy.selectAttack());
+        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
     } );//Build in retaliation on 1s timer?
-$specialButton.addEventListener("click", () => {hero.specialMove()} );//Build in retaliation on 1s timer?
-
+$specialButton.addEventListener("click", () => {
+    console.log(hero.specialMove());  
+    setTimeout(() => {console.log(enemy.selectAttack());
+        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
+    } );
 
 /*
 
