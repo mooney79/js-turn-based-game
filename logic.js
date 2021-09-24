@@ -31,13 +31,13 @@ class Scoundrel {
             let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
-            return `The ${this.name} hits the ${enemy.name} for ${damage} damage!`
+            return `The ${this.name} hits the ${enemy.name} for ${damage} damage!<br>`
         } else {
-            return `The ${this.name}'s blaster shot misses the enemy!`;
+            return `The ${this.name}'s blaster shot misses the enemy!<br>`;
         }
     }
     specialMove(){
-        $attackLog.innerHTML += `The ${this.name} hides from the enemy! To be implemented`;
+        $attackLog.innerHTML += `The ${this.name} hides from the enemy! To be implemented<br>`;
     }
 }
 
@@ -57,17 +57,17 @@ class Alien {
             let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
-            return `The ${this.name} hits the ${enemy.name} with a giant clubfor ${damage} damage!`
+            return `The ${this.name} hits the ${enemy.name} with a giant clubfor ${damage} damage!<br>`
         } else {
-            return `The ${this.name}'s club only grazes the ${enemy.name}!`;
+            return `The ${this.name}'s club only grazes the ${enemy.name}!<br>`;
         }
     }
     specialMove(){
-        hero.health += 5;
-        if (hero.health > 12) {
-            hero.health = 12;
+        this.health += 5;
+        if (this.health > 12) {
+            this.health = 12;
         }
-        $attackLog.innerHTML += `The ${this.name} summons his inner reserves shakes off some damage.`;
+        return `The ${this.name} summons his inner reserves shakes off some damage.<br>`;
     }
 }
 
@@ -86,9 +86,9 @@ class Jedi {
             let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
-            return `The ${hero.name} used the force and dealt ${damage} damage!`;
+            return `The ${hero.name} used the force and dealt ${damage} damage!<br>`;
         } else {
-            return `The force was not strong enough in this young ${hero.name}...`;
+            return `The force was not strong enough in this young ${hero.name}...<br>`;
         }
     }
     specialMove(){
@@ -96,9 +96,9 @@ class Jedi {
             let damageMod = 3;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
-            return `The ${hero.name} swings his lightsaber in a flurry dealing ${damage} damage!`;
+            return `The ${hero.name} swings his lightsaber in a flurry dealing ${damage} damage!<br>`;
         } else {
-            return `The so called ${hero.name} should learn to land at least one hit.`;
+            return `The so called ${hero.name} should learn to land at least one hit.<br>`;
         }
     }
 }
@@ -133,18 +133,18 @@ class SithLord {
         if(generatePercentage() < this.accuracyPercent) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
-            return `The ${this.name} hits the ${hero.name} for ${damage} damage!`
+            return `The ${this.name} hits the ${hero.name} for ${damage} damage!<br>`
         } else {
-            return `The ${this.name}'s lightsaber swing misses the hero!`;
+            return `The ${this.name}'s lightsaber swing misses the hero!<br>`;
         }
     }
     shootLightning(damageMod){
         if(generatePercentage() < this.accuracyPercent - 30) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
-            return `The ${this.name} blasts the ${hero.name} with lightning, inflicting ${damage} damage!`
+            return `The ${this.name} blasts the ${hero.name} with lightning, inflicting ${damage} damage!<br>`
         } else {
-            return `The ${this.name}'s lightning is dodged by the ${hero.name}!`;
+            return `The ${this.name}'s lightning is dodged by the ${hero.name}!<br>`;
         }
     }
 }
@@ -175,18 +175,18 @@ class Dragon {
         if(generatePercentage() < this.accuracyPercent-40) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
-            return `The ${this.name} claws and bites the ${hero.name} for ${damage} damage!`
+            return `The ${this.name} claws and bites the ${hero.name} for ${damage} damage!<br>`
         } else {
-            return `The ${this.name}'s wild attacks miss the hero!`;
+            return `The ${this.name}'s wild attacks miss the hero!<br>`;
         }
     }
     breathFire(damageMod){
         if(generatePercentage() < this.accuracyPercent - 60) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
-            return `The ${this.name} blasts the ${hero.name} with its fiery breath, inflicting ${damage} damage!`
+            return `The ${this.name} blasts the ${hero.name} with its fiery breath, inflicting ${damage} damage!<br>`
         } else {
-            return `The ${this.name}'s fiery breath is dodged by the ${hero.name}!`;
+            return `The ${this.name}'s fiery breath is dodged by the ${hero.name}!<br>`;
         }
     }
   }
@@ -217,18 +217,18 @@ class StormTrooper {
         if(generatePercentage() < this.accuracyPercent){
             let damage = generateDamage(damageMod);
             hero.health -= damage;
-            return `The ${this.name} somehow hit ${hero.name}, dealing ${damage} damage!`
+            return `The ${this.name} somehow hit ${hero.name}, dealing ${damage} damage!<br>`
         }   else {
-            return `The ${this.name} needs to work on his aim`;
+            return `The ${this.name} needs to work on his aim<br>`;
         }
     }
     blastBlindly(damageMod){
         if(generatePercentage() < this.accuracyPercent + 40) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
-            return `The ${this.name} landed at least 1 shot in the dark on the ${hero.name}, dealing ${damage} damage!`
+            return `The ${this.name} landed at least 1 shot in the dark on the ${hero.name}, dealing ${damage} damage!<br>`
         } else {
-            return `The ${this.name} shot everything but the ${hero.name}!`;
+            return `The ${this.name} shot everything but the ${hero.name}!<br>`;
         }
     }
 }
@@ -248,13 +248,13 @@ let enemy = new StormTrooper;
 function pickEnemy(){
     let randomNumber = generatePercentage();
     if (randomNumber < 15) {
-        $attackLog.innerHTML += 'The hero encountered a Dragon!';
+        $attackLog.innerHTML += 'The hero encountered a Dragon!<br>';
         return new Dragon;
     } else if (randomNumber < 35) {
-        $attackLog.innerHTML += 'The hero encountered a hooded figure!';
+        $attackLog.innerHTML += 'The hero encountered a hooded figure!<br>';
         return new SithLord;
     } else {
-        $attackLog.innerHTML += 'The hero ran into a Stormtrooper!';
+        $attackLog.innerHTML += 'The hero ran into a Stormtrooper!<br>';
         return new StormTrooper;
     }
 }
@@ -280,9 +280,9 @@ function onEnemyDeath(){
 }
 
 function onHeroDeath(){
-    $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}`;
+    $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
     //Create API to fetch and push hero score for screen on game over
-    $attackLog.innerHTML += 'Refresh and choose a new hero to try again!';
+    $attackLog.innerHTML += 'Refresh and choose a new hero to try again!<br>';
 }
 
 
@@ -348,34 +348,16 @@ $charSelect = document.getElementById("change-character");
 
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
-<<<<<<< HEAD
     $attackLog.innerHTML += hero.baseMove();  
     setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
-=======
-    console.log(hero.baseMove());
-    setTimeout(() => {console.log(enemy.selectAttack());
-<<<<<<< HEAD
->>>>>>> cc1a25a (Adding dom selector for the log box)
         $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);         
-=======
-        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);
->>>>>>> a74b17c (Adding dom selector for the log box)
     });
 $specialButton.addEventListener("click", () => {
-<<<<<<< HEAD
     $attackLog.innerHTML += hero.specialMove();  
     setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
-=======
-    console.log(hero.specialMove());
-    setTimeout(() => {console.log(enemy.selectAttack());
-<<<<<<< HEAD
->>>>>>> cc1a25a (Adding dom selector for the log box)
         $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
-=======
-        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);
->>>>>>> a74b17c (Adding dom selector for the log box)
     });
 
 
