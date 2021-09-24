@@ -37,7 +37,7 @@ class Scoundrel {
         }
     }
     specialMove(){
-        console.log(`The ${this.name} hides from the enemy! To be implemented`);
+        $attackLog.innerHTML += `The ${this.name} hides from the enemy! To be implemented`;
     }
 }
 
@@ -67,7 +67,7 @@ class Alien {
         if (hero.health > 12) {
             hero.health = 12;
         }
-        console.log(`The ${this.name} summons his inner reserves shakes off some damage.`);
+        $attackLog.innerHTML += `The ${this.name} summons his inner reserves shakes off some damage.`;
     }
 }
 
@@ -248,13 +248,13 @@ let enemy = new StormTrooper;
 function pickEnemy(){
     let randomNumber = generatePercentage();
     if (randomNumber < 15) {
-        console.log('The hero encountered a Dragon!');
+        $attackLog.innerHTML += 'The hero encountered a Dragon!';
         return new Dragon;
     } else if (randomNumber < 35) {
-        console.log('The hero encountered a hooded figure!');
+        $attackLog.innerHTML += 'The hero encountered a hooded figure!';
         return new SithLord;
     } else {
-        console.log('The hero ran into a Stormtrooper!');
+        $attackLog.innerHTML += 'The hero ran into a Stormtrooper!';
         return new StormTrooper;
     }
 }
@@ -280,9 +280,9 @@ function onEnemyDeath(){
 }
 
 function onHeroDeath(){
-    console.log(`You died!  Your final score was: ${hero.score}`);
+    $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}`;
     //Create API to fetch and push hero score for screen on game over
-    console.log('Refresh and choose a new hero to try again!');
+    $attackLog.innerHTML += 'Refresh and choose a new hero to try again!';
 }
 
 
@@ -347,14 +347,14 @@ $charSelect = document.getElementById("change-character");
 
 /////// EVENT LISTENERS ///////
 $attackButton.addEventListener("click", () => {
-    console.log(hero.baseMove());  
-    setTimeout(() => {console.log(enemy.selectAttack());
+    $attackLog.innerHTML += hero.baseMove();  
+    setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
         $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);         
     });
 $specialButton.addEventListener("click", () => {
-    console.log(hero.specialMove());  
-    setTimeout(() => {console.log(enemy.selectAttack());
+    $attackLog.innerHTML += hero.specialMove();  
+    setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
         $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
         $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
     });
