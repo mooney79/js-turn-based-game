@@ -1,6 +1,10 @@
 *{
     box-sizing: border-box;
 }
+  @font-face {
+  font-family: "Death Star";
+  src: url("DeathStar-VmWB.ttf");
+  }
 
 body {
     background-image: url('https://wallpaperaccess.com/full/3430638.png');
