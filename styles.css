@@ -2,6 +2,9 @@
     box-sizing: border-box;
     overflow:hidden;
 }
+img{
+    width: 100%;
+}
   @font-face {
   font-family: "Death Star";
   src: url("DeathStar-VmWB.ttf");
@@ -61,10 +64,15 @@ progress#health-enemy::-webkit-progress-value {
     border: none;
     border-radius: 10px;
 }
-    
+
 
 .game-log {
     height: 50vh;
     max-height: 50vh;
     overflow-y: scroll;
+}
+
+.game-log {
+    padding: 10px;
+    font-family: 'roboto', sans-serif;
 }
