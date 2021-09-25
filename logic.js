@@ -311,6 +311,7 @@ function pickEnemy(){
 //////// CALLS ON DEATHS ////////
 function onEnemyDeath(){
     hero.score += enemy.score;
+    $scoreBox.innerHTML = `Score :  ${hero.score}`;
     enemy = pickEnemy();
 
 }
@@ -453,6 +454,5 @@ TO-DO LIST
 ----------
 game over popup
 API stuff implemented (with sort)
-Display current score to window in the DOM
 animations
 */
