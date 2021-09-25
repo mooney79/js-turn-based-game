@@ -49,7 +49,7 @@ class Alien {
             let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
-            return `The ${this.name} hits the ${enemy.name} with a giant clubfor ${damage} damage!<br>`
+            return `The ${this.name} hits the ${enemy.name} with a giant club for ${damage} damage!<br>`
         } else {
             return `The ${this.name}'s club only grazes the ${enemy.name}!<br>`;
         }
@@ -226,7 +226,7 @@ class StormTrooper {
 }
 
 
-
+///// PRE-INITIALIZING VARIABLES
 let hero = new Scoundrel;
 let enemy = new StormTrooper;
 
@@ -258,16 +258,18 @@ function onEnemyDeath(){
 
 }
 
-function onHeroDeath(){
-    $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
-    //Create API to fetch and push hero score for screen on game over
-    $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
+function checkHeroDeath(){
+    if (hero.health <= 0){
+        $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
+        //Create API to fetch and push hero score for screen on game over
+        $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
+        $attackLog.scrollTop = $attackLog.scrollHeight; 
+    }
 }
 
 
 
 ///// SCOREBOARD/API STUFF
-
 function fetchScore() {
     fetch('https://tiny-taco-server.herokuapp.com/tbscore/')
     .then(response => response.json())
@@ -275,8 +277,6 @@ function fetchScore() {
         console.log(data);
     })
 }
-
-//hero.score = 400;  //for testing
 
 function uploadScore(){
     const outgoingScore = hero.score;
@@ -305,7 +305,6 @@ function uploadScore(){
 }
 
 
-/////////////HERO CONTROL BUTTONS////////////
 /////// DOM SELECTORS //////
 const $attackButton = document.getElementById("attack-button");
 $attackButton.innerHTML = hero.basicMove;
@@ -322,7 +321,7 @@ $enemyImg = document.getElementById("enemy-image");
 
 
 
-/////// EVENT LISTENERS ///////
+/////// EVENT LISTENERS/HERO BUTTONS ///////
 $charSelect.addEventListener("change", selectHero);
 
 $attackButton.addEventListener("click", () => {
@@ -331,10 +330,8 @@ $attackButton.addEventListener("click", () => {
     if (enemy.health > 0) { 
         setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
             $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
-            $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);
-            if (hero.health <= 0){
-                onHeroDeath();
-            }
+            $healthBar.value = (hero.health/hero.healthMax)*100; 
+            return checkHeroDeath()}, 1000)
             $attackLog.scrollTop = $attackLog.scrollHeight;
     } else {
         $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;
@@ -349,10 +346,8 @@ $specialButton.addEventListener("click", () => {
     if (enemy.health > 0) { 
         setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
             $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
-            $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000); 
-            if (hero.health <= 0){
-                onHeroDeath();
-            }
+            $healthBar.value = (hero.health/hero.healthMax)*100;
+            return checkHeroDeath()}, 1000); 
             $attackLog.scrollTop = $attackLog.scrollHeight;   
     } else {
         $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;    
@@ -383,19 +378,11 @@ function selectHero(event){
     $specialButton.innerHTML = hero.specialtyMove;
 }
 
-
-
-
 /*
-while (hero.health > 0){
-    
-}
-
-
-
-IMPLEMENT 
-hero death logic/game over stuff
-API stuff
-score thingie
+TO-DO LIST
+----------
+game over popup
+API stuff implemented (with sort)
+Display current score to window in the DOM
 animations
 */
