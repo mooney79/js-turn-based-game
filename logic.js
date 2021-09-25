@@ -243,7 +243,7 @@ function pickEnemy(){
         return new SithLord;
     } else {
         $attackLog.innerHTML += 'The hero ran into a Stormtrooper!<br>';
-        $enemyImg.setAttribute('src',"./images/stormtrooper.png");
+        $enemyImg.setAttribute('src',"./images/stormtrooper-removebg-preview (1).png");
         return new StormTrooper;
     }
 }
@@ -381,6 +381,7 @@ function selectHero(event){
 /*
 TO-DO LIST
 ----------
+prevent dead hero from attacking
 game over popup
 API stuff implemented (with sort)
 Display current score to window in the DOM
