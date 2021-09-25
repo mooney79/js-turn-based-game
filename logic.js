@@ -235,11 +235,11 @@ function pickEnemy(){
     let randomNumber = generatePercentage();
     if (randomNumber < 15) {
         $attackLog.innerHTML += 'The hero encountered a Dragon!<br>';
-        $enemyImg.setAttribute('src',"./images/dragon-from-shrek.jpeg");
+        $enemyImg.setAttribute('src',"./images/dragon-from-shrek (1).jpeg");
         return new Dragon;
     } else if (randomNumber < 35) {
         $attackLog.innerHTML += 'The hero encountered a hooded figure!<br>';
-        $enemyImg.setAttribute('src',"./images/sith-lord.png");
+        $enemyImg.setAttribute('src',"./images/sith-lord (1).png");
         return new SithLord;
     } else {
         $attackLog.innerHTML += 'The hero ran into a Stormtrooper!<br>';
@@ -360,7 +360,7 @@ $specialButton.addEventListener("click", () => {
 function selectHero(event){
     if ($charSelect.value == 'jedi') {
         hero = new Jedi;
-        $heroImg.setAttribute('src',"./images/jedi.png");
+        $heroImg.setAttribute('src',"./images/jedi (1).png");
         $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       } else if ($charSelect.value == 'scoundrel') {
@@ -370,7 +370,7 @@ function selectHero(event){
         enemy  = pickEnemy();
       } else if ($charSelect.value == 'alien') {
         hero = new Alien;
-        $heroImg.setAttribute('src',"./images/chewbacca.jpeg");
+        $heroImg.setAttribute('src',"./images/chewbacca (1).jpeg");
         $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       }

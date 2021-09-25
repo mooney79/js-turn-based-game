@@ -13,6 +13,9 @@ img{
   img{
       background-color: transparent;
       width: 100%;
+      /*Testing*/
+      height: 50vh;
+      object-fit: scale-down;
   }
 body {
     background-image: url('https://wallpaperaccess.com/full/3430638.png');
