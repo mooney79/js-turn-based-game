@@ -320,7 +320,7 @@ function checkHeroDeath(){
         $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
         //Create API to fetch and push hero score for screen on game over
         $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
-        $attackLog.scrollTop = $attackLog.scrollHeight; 
+        $attackLog.scrollTop = $attackLog.scrollHeight;
     }
 }
 
@@ -375,8 +375,15 @@ const $attackLog = document.querySelector('.game-log');
 $charSelect = document.getElementById("change-character");
 $heroImg = document.getElementById("hero-image");
 $enemyImg = document.getElementById("enemy-image");
+$scoreBox = document.querySelector('#score');
+$scoreBox.innerHTML = `Score :  ${hero.score}`;
 
 
+//////// AUDIO //////////
+function play() {
+  var audio = new Audio('Audio/Star Wars Theme Song By John Williams.mp3');
+  audio.play();
+}
 
 /////// EVENT LISTENERS/HERO BUTTONS ///////
 $charSelect.addEventListener("change", selectHero);
@@ -385,19 +392,19 @@ $attackButton.addEventListener("click", () => {
     if (hero.health <= 0) {
          return $attackLog.innerHTML += "Dead heroes can't attack! Pick a new character to play again.<br>"
     }
-    $attackLog.innerHTML += hero.baseMove(); 
+    $attackLog.innerHTML += hero.baseMove();
     $attackLog.scrollTop = $attackLog.scrollHeight;
-    if (enemy.health > 0) { 
+    if (enemy.health > 0) {
         setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
-            $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
-            $healthBar.value = (hero.health/hero.healthMax)*100; 
+            $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;
+            $healthBar.value = (hero.health/hero.healthMax)*100;
             return checkHeroDeath()}, 1000)
             $attackLog.scrollTop = $attackLog.scrollHeight;
     } else {
         $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;
-        onEnemyDeath();     
-        $attackLog.scrollTop = $attackLog.scrollHeight;   
-        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;     
+        onEnemyDeath();
+        $attackLog.scrollTop = $attackLog.scrollHeight;
+        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;
 }});
 
 $specialButton.addEventListener("click", () => {
@@ -405,18 +412,18 @@ $specialButton.addEventListener("click", () => {
         return $attackLog.innerHTML += "Dead heroes can't attack! Pick a new character to play again.<br>"
    }
     $attackLog.innerHTML += hero.specialMove();
-    $attackLog.scrollTop = $attackLog.scrollHeight;  
-    if (enemy.health > 0) { 
+    $attackLog.scrollTop = $attackLog.scrollHeight;
+    if (enemy.health > 0) {
         setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
-            $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
+            $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;
             $healthBar.value = (hero.health/hero.healthMax)*100;
-            return checkHeroDeath()}, 1000); 
-            $attackLog.scrollTop = $attackLog.scrollHeight;   
+            return checkHeroDeath()}, 1000);
+            $attackLog.scrollTop = $attackLog.scrollHeight;
     } else {
-        $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;    
-        onEnemyDeath();     
+        $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;
+        onEnemyDeath();
         $attackLog.scrollTop = $attackLog.scrollHeight;
-        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;    
+        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;
 }});
 
 

@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turn Based</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
     <link href="./styles.css" rel="stylesheet">
 </head>
 <body>
@@ -24,14 +30,16 @@
                 <option class="dropdown-item" id="alien-dropdown" value="alien">Alien</option>
              </select>
             </div>
-
+<!--backup***
         <figure>
             <figcaption>Click to listen:</figcaption>
             <audio
         controls
         src="Audio/Star Wars Theme Song By John Williams.mp3" type="audio/mp3">
             </audio>
-        </figure>
+        </figure> -->
+        <div id="score"></div>
+        <button class="play-btn" onclick="play()"><i class="fas fa-volume-up"></i></button>
 
         </nav>
              <h1 class="game-title">Budget Star Wars</h1>

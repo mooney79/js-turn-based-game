@@ -25,6 +25,13 @@ body {
 }
 nav {
     padding-top:10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:50px;
+}
+
+label {
+    display: flex;
 }
 select {
     padding:5px;
@@ -34,6 +41,7 @@ select {
     text-align: center;
     font-size: 50px;
 }
+
 
 #health {
     background-color: green;
@@ -54,6 +62,17 @@ progress#health-enemy::-webkit-progress-value {
 
 #special-button {
     background-color: yellow;
+}
+.play-btn {
+    padding: 5px;
+    background: none;
+    border:none;
+    color: white;
+    font-size: 24px;
+}
+.play-btn:hover {
+    background: none;
+    color:#3a7bd4
 }
 
 .buttons-for-attack {
@@ -78,4 +97,14 @@ progress#health-enemy::-webkit-progress-value {
 .game-log {
     padding: 10px;
     font-family: 'roboto', sans-serif;
+}
+
+#score {
+    display: flex;
+    background:rgba(117, 117, 117, 0.5);
+    border:none;
+    border-radius: 10px;
+    height:8%;
+    text-align: center;
+    padding: 8px;
 }
