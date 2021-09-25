@@ -382,6 +382,7 @@ function selectHero(event){
 TO-DO LIST
 ----------
 prevent dead hero from attacking
+implement Hide (or change scoundrel special)
 game over popup
 API stuff implemented (with sort)
 Display current score to window in the DOM
