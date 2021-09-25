@@ -1,11 +1,3 @@
-/*
-I'm moving game logic to this file so we can have it not cluttering up the main.
-When we reach the point where we can use it, we can copy it into the main.
-
-And once this file is empty, we can remove the dependency in index.html
-*/
-
-
 ///// RANDOM NUMBER GENERATORS /////
 function generatePercentage(){
     return (Math.floor(Math.random() * 100)+1);
@@ -235,40 +227,27 @@ class StormTrooper {
 
 
 
-//Depending on which button is picked from dropdown, determine
-//which Class hero becomes
-//Add event listener, on click set hero to button value(manually?), then launch game
-//routine..
 let hero = new Scoundrel;
 let enemy = new StormTrooper;
 
-//Enemy encounter rates to be implemented once
-//additional enemies are put in the game.
 
 function pickEnemy(){
     let randomNumber = generatePercentage();
     if (randomNumber < 15) {
         $attackLog.innerHTML += 'The hero encountered a Dragon!<br>';
+        $enemyImg.setAttribute('src',"./images/dragon-from-shrek.jpeg");
         return new Dragon;
     } else if (randomNumber < 35) {
         $attackLog.innerHTML += 'The hero encountered a hooded figure!<br>';
+        $enemyImg.setAttribute('src',"./images/sith-lord.png");
         return new SithLord;
     } else {
         $attackLog.innerHTML += 'The hero ran into a Stormtrooper!<br>';
+        $enemyImg.setAttribute('src',"./images/stormtrooper.png");
         return new StormTrooper;
     }
 }
 
-
-
-
-// let enemy = pickEnemy();
-// console.log(hero.shootBlaster());
-// console.log(enemy.selectAttack());
-// console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
-// console.log(hero.shootBlaster());
-// console.log(enemy.selectAttack());
-// console.log(`Hero: ${hero.health}, Enemy:${enemy.health}`);
 
 
 
@@ -282,7 +261,7 @@ function onEnemyDeath(){
 function onHeroDeath(){
     $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
     //Create API to fetch and push hero score for screen on game over
-    $attackLog.innerHTML += 'Refresh and choose a new hero to try again!<br>';
+    $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
 }
 
 
@@ -293,8 +272,6 @@ function fetchScore() {
     fetch('https://tiny-taco-server.herokuapp.com/tbscore/')
     .then(response => response.json())
     .then(data => {
-        // data["timestamp"].sort();
-        // data.forEach(createElement)});
         console.log(data);
     })
 }
@@ -338,56 +315,68 @@ const $healthBar = document.getElementById("health");
 $healthBar.value = 100;
 const $healthEnemyBar = document.getElementById("health-enemy");
 $healthEnemyBar.value = 100;
-// $jediButton = document.getElementById("jedi-dropdown");
-// $alienButton = document.getElementById("alien-dropdown");
-// $scoundrelButton = document.getElementById("scoundrel-dropdown");
 const $attackLog = document.querySelector('.game-log');
 $charSelect = document.getElementById("change-character");
+$heroImg = document.getElementById("hero-image");
+$enemyImg = document.getElementById("enemy-image");
 
 
 
 /////// EVENT LISTENERS ///////
-$attackButton.addEventListener("click", () => {
-    $attackLog.innerHTML += hero.baseMove();  
-    setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
-        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
-        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);         
-    });
-$specialButton.addEventListener("click", () => {
-    $attackLog.innerHTML += hero.specialMove();  
-    setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
-        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
-        $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);    
-    });
-
-
-
-//Switch statement to get value of drop down items?
-// $jediButton.addEventListener("click", () => {
-//     hero = new Jedi;
-//     enemy  = pickEnemy();
-//     console.log('Jedi clicked');
-// });
-// $alienButton.addEventListener("click", () => {
-//     hero = new Alien;
-//     enemy  = pickEnemy();
-// });
-// $scoundrelButton.addEventListener("click", () => {
-//     hero = new Alien;
-//     enemy  = pickEnemy();
-// });
-
 $charSelect.addEventListener("change", selectHero);
+
+$attackButton.addEventListener("click", () => {
+    $attackLog.innerHTML += hero.baseMove(); 
+    $attackLog.scrollTop = $attackLog.scrollHeight;
+    if (enemy.health > 0) { 
+        setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
+            $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
+            $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000);
+            if (hero.health <= 0){
+                onHeroDeath();
+            }
+            $attackLog.scrollTop = $attackLog.scrollHeight;
+    } else {
+        $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;
+        onEnemyDeath();     
+        $attackLog.scrollTop = $attackLog.scrollHeight;   
+        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;     
+}});
+
+$specialButton.addEventListener("click", () => {
+    $attackLog.innerHTML += hero.specialMove();
+    $attackLog.scrollTop = $attackLog.scrollHeight;  
+    if (enemy.health > 0) { 
+        setTimeout(() => {$attackLog.innerHTML += enemy.selectAttack();
+            $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100; 
+            $healthBar.value = (hero.health/hero.healthMax)*100;}, 1000); 
+            if (hero.health <= 0){
+                onHeroDeath();
+            }
+            $attackLog.scrollTop = $attackLog.scrollHeight;   
+    } else {
+        $attackLog.innerHTML += `${enemy.name} is dead and can't attack.<br>`;    
+        onEnemyDeath();     
+        $attackLog.scrollTop = $attackLog.scrollHeight;
+        $healthEnemyBar.value = (enemy.health/enemy.healthMax)*100;    
+}});
+
 
 function selectHero(event){
     if ($charSelect.value == 'jedi') {
         hero = new Jedi;
+        $heroImg.setAttribute('src',"./images/jedi.png");
+        $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       } else if ($charSelect.value == 'scoundrel') {
         hero = new Scoundrel;
+        $heroImg.setAttribute('src',"./images/han-solo.png");
+        $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       } else if ($charSelect.value == 'alien') {
         hero = new Alien;
+        $heroImg.setAttribute('src',"./images/chewbacca.jpeg");
+        $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       }
     $attackButton.innerHTML = hero.basicMove;
@@ -397,60 +386,16 @@ function selectHero(event){
 
 
 
-/////// LOGIC TREES //////
-//variable names and such need to be re-tooled to accomodate
-//the class structure
-
-
 /*
-
-//////// SHOULD BE BUILT INTO ENEMY CLASSES
-function enemyAttack(enemy){
-    if(generatePercentage() < exampleVillainArray[monsterIndex].hitChance) {
-        let damage = generateDamage();
-        exampleHero.health -= damage;
-        return `The hero was hit by the ${exampleVillainArray[monsterIndex].name} for ${damage} damage!`
-    } else
-        return `The ${exampleVillainArray[monsterIndex].name} missed his attack!`;
-}
-
-//////// SHOULD BE BUILT INTO HERO CLASSES
-function heroAttack(hero){
-    if(generatePercentage() < exampleHero.hitChance) {
-        let damage = generateDamageHero();
-        exampleVillainArray[monsterIndex].health -= damage;
-        return `The ${exampleHero.name} hero hit by the ${exampleVillainArray[monsterIndex].name} for ${damage} damage!`
-    } else
-        return `The ${exampleHero.name} hero missed his attack!`;
-}
-
-
-///// AUTOMATES THE FIGHTS.  GOOD FOR TESTING, NOT FOR PLAY.
-pickEnemy();
 while (hero.health > 0){
-    console.log(heroAttack());
-    console.log(`${exampleVillainArray[monsterIndex].name}  has ${exampleVillainArray[monsterIndex].health}  remaining!`);
-    if (exampleVillainArray[monsterIndex].health > 0) {
-        console.log(enemyAttack());
-    } else {
-        console.log(`${exampleVillainArray[monsterIndex].name} is dead and can't attack`);
-    }
-    console.log(`Hero has ${exampleHero.health} remaining!`);
-    if (exampleVillainArray[monsterIndex].health <= 0) {
-        exampleVillainArray[monsterIndex].health = 3;
-        pickEnemy();
-    }
+    
 }
 
 
 
 IMPLEMENT 
-On-death logic
-new game state when selecting new character
-Game over stuff
-IMG swapping on char/enemy select
+hero death logic/game over stuff
 API stuff
-scroll bar
 score thingie
 animations
 */

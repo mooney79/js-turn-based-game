@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    overflow:hidden;
 }
   @font-face {
   font-family: "Death Star";
@@ -55,7 +56,15 @@ progress#health-enemy::-webkit-progress-value {
 
 .game-log-area {
     background: rgba(117, 117, 117, 0.5);
-    height: 100%;
+    height: 50vh;
+    max-height: 50vh;
     border: none;
     border-radius: 10px;
+}
+    
+
+.game-log {
+    height: 50vh;
+    max-height: 50vh;
+    overflow-y: scroll;
 }
