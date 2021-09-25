@@ -381,10 +381,20 @@ $scoreBox.innerHTML = `Score :  ${hero.score}`;
 
 
 //////// AUDIO //////////
-function play() {
-  var audio = new Audio('Audio/Star Wars Theme Song By John Williams.mp3');
-  audio.play();
-}
+
+var audio = new Audio('Audio/Star Wars Theme Song By John Williams.mp3');
+var isPlaying = false;
+
+function togglePlay() {
+  isPlaying ? audio.pause() : audio.play();
+};
+
+audio.onplaying = function() {
+  isPlaying = true;
+};
+audio.onpause = function() {
+  isPlaying = false;
+};
 
 /////// EVENT LISTENERS/HERO BUTTONS ///////
 $charSelect.addEventListener("change", selectHero);
