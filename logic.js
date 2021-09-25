@@ -17,19 +17,32 @@ class Scoundrel {
       this.specialtyMove = "Hide";
       this.accuracyPercent = 85;
       this.score = 0;
+      this.hide = false;
+      this.hideCounter = 0;
+      this.hideCoolDown = 0;
     }
     baseMove(){
         if(generatePercentage() < this.accuracyPercent) {
             let damageMod = 1;
             let damage = generateDamage(damageMod);
             enemy.health -= damage;
+            if (this.hideCoolDown > 0) {
+                this.hideCoolDown -= 1;
+            }
+            // console.log(`Cooldown: ${this.hideCoolDown}`)
             return `The ${this.name} hits the ${enemy.name} for ${damage} damage!<br>`
         } else {
             return `The ${this.name}'s blaster shot misses the enemy!<br>`;
         }
     }
     specialMove(){
-        return `The ${this.name} hides from the enemy! To be implemented<br>`;
+        this.hide = true;
+        this.hideCounter = 3;
+        if (this.hideCoolDown > 0) {
+                this.hideCoolDown -= 1;
+            return `You're exposed for ${this.hideCoolDown+1} more turns!<br>`;
+        }
+        return `The ${this.name} hides from the enemy! They will miss their next three attacks!<br> After that, you will be exposed for 3 turns and unable to hide!<br>`;
     }
 }
 
@@ -43,6 +56,7 @@ class Alien {
       this.specialtyMove = "Regenerate";
       this.accuracyPercent = 75;
       this.score = 0;
+      this.hide = false;
     }
     baseMove(){
         if(generatePercentage() < this.accuracyPercent) {
@@ -72,6 +86,7 @@ class Jedi {
         this.specialtyMove = 'Saber Flurry';
         this.accuracyPercent = 95;
         this.score = 0;
+        this.hide = false;
     }
     baseMove(){
         if(generatePercentage() < this.accuracyPercent){
@@ -122,20 +137,34 @@ class SithLord {
         }
     }
     lightsaberAttack(damageMod){
-        if(generatePercentage() < this.accuracyPercent) {
+        if((generatePercentage() < this.accuracyPercent) && hero.hide === false) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} hits the ${hero.name} for ${damage} damage!<br>`
         } else {
+            if (hero.hide === true){
+                hero.hideCounter -= 1;
+                if (hero.hideCounter === 0){
+                    hero.hide = false;
+                    hero.hideCoolDown = 3;
+                }
+            }
             return `The ${this.name}'s lightsaber swing misses the hero!<br>`;
         }
     }
     shootLightning(damageMod){
-        if(generatePercentage() < this.accuracyPercent - 30) {
+        if((generatePercentage() < this.accuracyPercent - 30) && hero.hide === false ){
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} blasts the ${hero.name} with lightning, inflicting ${damage} damage!<br>`
         } else {
+            if (hero.hide === true){
+                hero.hideCounter -= 1;
+                if (hero.hideCounter === 0){
+                    hero.hide = false;
+                    hero.hideCoolDown = 3;
+                }
+            }
             return `The ${this.name}'s lightning is dodged by the ${hero.name}!<br>`;
         }
     }
@@ -164,20 +193,34 @@ class Dragon {
         }
     }
     clawsAndBite(damageMod){
-        if(generatePercentage() < this.accuracyPercent-40) {
+        if((generatePercentage() < this.accuracyPercent-40) && hero.hide === false)  {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} claws and bites the ${hero.name} for ${damage} damage!<br>`
         } else {
+            if (hero.hide === true){
+                hero.hideCounter -= 1;
+                if (hero.hideCounter === 0){
+                    hero.hide = false;
+                    hero.hideCoolDown = 3;
+                }
+            }
             return `The ${this.name}'s wild attacks miss the hero!<br>`;
         }
     }
     breathFire(damageMod){
-        if(generatePercentage() < this.accuracyPercent - 60) {
+        if((generatePercentage() < this.accuracyPercent - 60) && hero.hide === false) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} blasts the ${hero.name} with its fiery breath, inflicting ${damage} damage!<br>`
         } else {
+            if (hero.hide === true){
+                hero.hideCounter -= 1;
+                if (hero.hideCounter === 0){
+                    hero.hide = false;
+                    hero.hideCoolDown = 3;
+                }
+            }
             return `The ${this.name}'s fiery breath is dodged by the ${hero.name}!<br>`;
         }
     }
@@ -206,20 +249,34 @@ class StormTrooper {
         }
     }
     shootBlindly(damageMod){
-        if(generatePercentage() < this.accuracyPercent){
+        if((generatePercentage() < this.accuracyPercent) && hero.hide === false) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} somehow hit ${hero.name}, dealing ${damage} damage!<br>`
         }   else {
+            if (hero.hide === true){
+                hero.hideCounter -= 1;
+                if (hero.hideCounter === 0){
+                    hero.hide = false;
+                    hero.hideCoolDown = 3;
+                }
+            }
             return `The ${this.name} needs to work on his aim<br>`;
         }
     }
     blastBlindly(damageMod){
-        if(generatePercentage() < this.accuracyPercent + 40) {
+        if((generatePercentage() < this.accuracyPercent + 40) && hero.hide === false) {
             let damage = generateDamage(damageMod);
             hero.health -= damage;
             return `The ${this.name} landed at least 1 shot in the dark on the ${hero.name}, dealing ${damage} damage!<br>`
         } else {
+            if (hero.hide === true){
+                hero.hideCounter -= 1;
+                if (hero.hideCounter === 0){
+                    hero.hide = false;
+                    hero.hideCoolDown = 3;
+                }
+            }
             return `The ${this.name} shot everything but the ${hero.name}!<br>`;
         }
     }
@@ -325,6 +382,9 @@ $enemyImg = document.getElementById("enemy-image");
 $charSelect.addEventListener("change", selectHero);
 
 $attackButton.addEventListener("click", () => {
+    if (hero.health <= 0) {
+         return $attackLog.innerHTML += "Dead heroes can't attack! Pick a new character to play again.<br>"
+    }
     $attackLog.innerHTML += hero.baseMove(); 
     $attackLog.scrollTop = $attackLog.scrollHeight;
     if (enemy.health > 0) { 
@@ -341,6 +401,9 @@ $attackButton.addEventListener("click", () => {
 }});
 
 $specialButton.addEventListener("click", () => {
+    if (hero.health <= 0) {
+        return $attackLog.innerHTML += "Dead heroes can't attack! Pick a new character to play again.<br>"
+   }
     $attackLog.innerHTML += hero.specialMove();
     $attackLog.scrollTop = $attackLog.scrollHeight;  
     if (enemy.health > 0) { 
@@ -381,8 +444,6 @@ function selectHero(event){
 /*
 TO-DO LIST
 ----------
-prevent dead hero from attacking
-implement Hide (or change scoundrel special)
 game over popup
 API stuff implemented (with sort)
 Display current score to window in the DOM
