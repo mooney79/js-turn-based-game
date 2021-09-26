@@ -1,4 +1,4 @@
-///// RANDOM NUMBER GENERATORS /////
+///// GENERIC FUNCTIONS /////
 function generatePercentage(){
     return (Math.floor(Math.random() * 100)+1);
 }
@@ -6,6 +6,19 @@ function generatePercentage(){
 function generateDamage(damageMod){
     return (Math.floor(Math.random() *2) +1 + damageMod);
 }
+
+
+function compare(a,b) {
+    const scoreA = a.score;
+    const scoreB = b.score;
+    let comparison =0;
+    if (scoreA > scoreB) {
+        comparison = -1;
+    } else if (scoreA < scoreB) {
+        comparison = 1};
+    return comparison;
+}
+
 
 //////////// HERO CLASSES ////////////
 class Scoundrel {
@@ -286,6 +299,8 @@ class StormTrooper {
 ///// PRE-INITIALIZING VARIABLES
 let hero = new Scoundrel;
 let enemy = new StormTrooper;
+let highScores = [];
+
 
 
 function pickEnemy(){
@@ -319,7 +334,8 @@ function onEnemyDeath(){
 function checkHeroDeath(){
     if (hero.health <= 0){
         $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
-        //Create API to fetch and push hero score for screen on game over
+        uploadScore();
+        
         $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
         $attackLog.scrollTop = $attackLog.scrollHeight;
     }
@@ -328,11 +344,16 @@ function checkHeroDeath(){
 
 
 ///// SCOREBOARD/API STUFF
+
 function fetchScore() {
-    fetch('https://tiny-taco-server.herokuapp.com/tbscore/')
+    fetch('https://tiny-taco-server.herokuapp.com/tbscore/', {cache: "no-cache"})
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        highScores = (data.sort(compare));
+        $attackLog.innerHTML += 'Previous High Scores:<br>'
+        for (i = 0; i < 5; i++){ 
+           $attackLog.innerHTML += `Name: ${highScores[i]["player"]}&nbsp;&nbsp;&nbsp; Hero: ${highScores[i].hero}  &nbsp;&nbsp;&nbsp;    Score:${highScores[i].score}<br>`
+        }
     })
 }
 
@@ -359,6 +380,7 @@ function uploadScore(){
         })
         .then(data => console.log(data))
         .catch(error=> console.log('Error: ', error)) // catches errors if detected
+        fetchScore();
 
 }
 
@@ -467,5 +489,8 @@ TO-DO LIST
 ----------
 game over popup
 API stuff implemented (with sort)
+
+TIME-PERMITTING
+---------------
 animations
 */
