@@ -328,7 +328,6 @@ function onEnemyDeath(){
     hero.score += enemy.score;
     $scoreBox.innerHTML = `Score :  ${hero.score}`;
     enemy = pickEnemy();
-
 }
 
 function checkHeroDeath(){
@@ -337,6 +336,7 @@ function checkHeroDeath(){
         uploadScore();
         
         $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
+        $attackLog.innerHTML = "<span style='display:flex; justify-content:center; align-items:center; color:red; font-family:Death Star; font-size:50px; margin-top:125px; text-align:center;'>Game Over</span>";
         $attackLog.scrollTop = $attackLog.scrollHeight;
     }
 }

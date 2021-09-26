@@ -21,7 +21,6 @@ body {
     background-image: url('https://wallpaperaccess.com/full/3430638.png');
     color:White;
     font-family: 'Death Star', sans-serif;
-
 }
 nav {
     padding-top:10px;
@@ -39,7 +38,7 @@ select {
 
 .game-title{
     text-align: center;
-    font-size: 50px;
+    font-size: 75px;
     margin-bottom: 50px;
 }
 
@@ -56,7 +55,7 @@ progress#health-enemy::-webkit-progress-value {
     width:100%;
     border-radius: 10px;
 }
-/* progress::-webkit-progress-bar {background-color: red; width: 100%;} */
+
 .buttons-for-attack {
     display: flex;
     justify-content: space-between;
@@ -67,10 +66,18 @@ progress#health-enemy::-webkit-progress-value {
     display: flex
 }
 
+#attack-button:hover {
+    background-color: darkred;
+}
+
 #special-button {
     background-color: yellow;
     justify-content: flex-end;
 }
+#special-button:hover {
+    background-color: rgb(230, 196, 0);
+}
+
 .play-btn {
     padding: 5px;
     background: none;
