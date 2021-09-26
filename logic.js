@@ -345,11 +345,13 @@ function checkHeroDeath(){
 
 ///// SCOREBOARD/API STUFF
 
-function fetchScore() {
+function fetchScore(sentPacket) {
     fetch('https://tiny-taco-server.herokuapp.com/tbscore/', {cache: "no-cache"})
     .then(response => response.json())
     .then(data => {
         highScores = (data.sort(compare));
+        // let newHighScore = [{player: player, hero: hero.name, score: hero.score}]
+        highScores =[...highScores, ...[sentPacket]];
         $attackLog.innerHTML += 'Previous High Scores:<br>'
         for (i = 0; i < 5; i++){ 
            $attackLog.innerHTML += `Name: ${highScores[i]["player"]}&nbsp;&nbsp;&nbsp; Hero: ${highScores[i].hero}  &nbsp;&nbsp;&nbsp;    Score:${highScores[i].score}<br>`
@@ -380,7 +382,7 @@ function uploadScore(){
         })
         .then(data => console.log(data))
         .catch(error=> console.log('Error: ', error)) // catches errors if detected
-        fetchScore();
+        fetchScore(sentPacket);
 
 }
 
