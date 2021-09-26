@@ -442,16 +442,19 @@ function selectHero(event){
     if ($charSelect.value == 'jedi') {
         hero = new Jedi;
         $heroImg.setAttribute('src',"./images/jedi (1).png");
+        $healthBar.value = (hero.health/hero.healthMax)*100;
         $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       } else if ($charSelect.value == 'scoundrel') {
         hero = new Scoundrel;
         $heroImg.setAttribute('src',"./images/han-solo.png");
+        $healthBar.value = (hero.health/hero.healthMax)*100;
         $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       } else if ($charSelect.value == 'alien') {
         hero = new Alien;
         $heroImg.setAttribute('src',"./images/chewbacca (1).jpeg");
+        $healthBar.value = (hero.health/hero.healthMax)*100;
         $attackLog.innerHTML = '';
         enemy  = pickEnemy();
       }
