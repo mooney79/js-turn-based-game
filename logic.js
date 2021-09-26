@@ -1,3 +1,6 @@
+(function () {
+
+
 ///// GENERIC FUNCTIONS /////
 function generatePercentage(){
     return (Math.floor(Math.random() * 100)+1);
@@ -486,11 +489,13 @@ function selectHero(event){
     $specialButton.innerHTML = hero.specialtyMove;
 }
 
+
+})();
+
 /*
 TO-DO LIST
 ----------
-game over popup
-API stuff implemented (with sort)
+
 
 TIME-PERMITTING
 ---------------
