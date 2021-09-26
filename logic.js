@@ -334,9 +334,9 @@ function checkHeroDeath(){
     if (hero.health <= 0){
         $attackLog.innerHTML += `You died!  Your final score was: ${hero.score}<br>`;
         uploadScore();
-        
+
         $attackLog.innerHTML += 'Choose a new hero to try again!<br>';
-        $attackLog.innerHTML = "<span style='display:flex; justify-content:center; align-items:center; color:red; font-family:Death Star; font-size:50px; margin-top:125px; text-align:center;'>Game Over</span>";
+        $attackLog.innerHTML = "<span style='display:flex; justify-content:center; align-items:center; color:red; font-family:Death Star; font-size:50px; margin-top:30px; text-align:center;'>Game Over</span>";
         $attackLog.scrollTop = $attackLog.scrollHeight;
     }
 }
@@ -352,9 +352,9 @@ function fetchScore(sentPacket) {
         highScores = (data.sort(compare));
         // let newHighScore = [{player: player, hero: hero.name, score: hero.score}]
         highScores =[...highScores, ...[sentPacket]];
-        $attackLog.innerHTML += 'Previous High Scores:<br>'
-        for (i = 0; i < 5; i++){ 
-           $attackLog.innerHTML += `Name: ${highScores[i]["player"]}&nbsp;&nbsp;&nbsp; Hero: ${highScores[i].hero}  &nbsp;&nbsp;&nbsp;    Score:${highScores[i].score}<br>`
+        $attackLog.innerHTML += "<span style='display:flex;justify-content:center; align-items:center;'>Previous High Scores:<br></span>"
+        for (i = 0; i < 5; i++){
+           $attackLog.innerHTML += `<span style='display:flex;margin-left:95px'>Name: ${highScores[i]["player"]}&nbsp;&nbsp;&nbsp; Hero: ${highScores[i].hero}  &nbsp;&nbsp;&nbsp;    Score:${highScores[i].score}<br></span>`
         }
     })
 }
